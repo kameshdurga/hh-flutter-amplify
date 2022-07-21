@@ -1,0 +1,39 @@
+type Restaurants @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Name: String
+  Address: String
+  Address2: String
+  City: String
+  State: String
+  Zipcode: Int
+  Contact1: String
+  Contact2: String
+  Phone1: AWSPhone
+  Phone2: AWSPhone
+  Email: AWSEmail
+  RestaurantID: ID
+  Web: String
+  Menu: String
+}
+
+type OrderItem @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  OrderID: ID
+  LineItems: AWSJSON
+  UserID: ID
+  SubTotal: Float
+  Tax: Float
+  untitledfield: String
+  ServiceFee: Float
+  Total: Float
+  CreatedAt: AWSTimestamp
+  usersID: ID! @index(name: "byUsers")
+}
+
+type Users @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  UserID: ID
+  UserStatus: String
+  OrderItems: [OrderItem] @hasMany(indexName: "byUsers", fields: ["id"])
+}
+ 

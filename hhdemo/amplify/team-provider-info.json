@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-hungerheroescopy-staging-191443-authRole",
+      "UnauthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-staging-191443-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-staging-191443-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-hungerheroescopy-staging-191443-deployment",
+      "UnauthRoleName": "amplify-hungerheroescopy-staging-191443-unauthRole",
+      "StackName": "amplify-hungerheroescopy-staging-191443",
+      "StackId": "arn:aws:cloudformation:us-east-2:754404958569:stack/amplify-hungerheroescopy-staging-191443/b75af220-0604-11ed-945a-06f66f7863be",
+      "AmplifyAppId": "d3sdlct8kz6qc0"
+    }
+  }
+}
