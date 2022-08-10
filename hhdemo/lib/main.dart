@@ -1,5 +1,7 @@
 import 'package:amplify_api/amplify_api.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:amplify_storage_s3/amplify_storage_s3.dart';
 import 'package:flutter/material.dart';
 import 'package:hhdemo/models/Restaurants.dart';
 import 'package:hhdemo/pages/home_page.dart';
@@ -168,8 +170,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _configureAmplify() async {
     try {
+      final storage = AmplifyStorageS3();
+      AmplifyAuthCognito auth = AmplifyAuthCognito();
       await Amplify.addPlugins(
-          [AmplifyAPI(modelProvider: ModelProvider.instance)]);
+          [auth, AmplifyAPI(modelProvider: ModelProvider.instance), storage]);
       await Amplify.configure(amplifyconfig);
       setState(() {
         _amplifyConfigured = true;

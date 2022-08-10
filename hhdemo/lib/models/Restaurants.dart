@@ -42,6 +42,7 @@ class Restaurants extends Model {
   final String? _RestaurantID;
   final String? _Web;
   final String? _Menu;
+  final String? _imagekey;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -109,6 +110,10 @@ class Restaurants extends Model {
     return _Menu;
   }
   
+  String? get imagekey {
+    return _imagekey;
+  }
+  
   TemporalDateTime? get createdAt {
     return _createdAt;
   }
@@ -117,9 +122,9 @@ class Restaurants extends Model {
     return _updatedAt;
   }
   
-  const Restaurants._internal({required this.id, Name, Address, Address2, City, State, Zipcode, Contact1, Contact2, Phone1, Phone2, Email, RestaurantID, Web, Menu, createdAt, updatedAt}): _Name = Name, _Address = Address, _Address2 = Address2, _City = City, _State = State, _Zipcode = Zipcode, _Contact1 = Contact1, _Contact2 = Contact2, _Phone1 = Phone1, _Phone2 = Phone2, _Email = Email, _RestaurantID = RestaurantID, _Web = Web, _Menu = Menu, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Restaurants._internal({required this.id, Name, Address, Address2, City, State, Zipcode, Contact1, Contact2, Phone1, Phone2, Email, RestaurantID, Web, Menu, imagekey, createdAt, updatedAt}): _Name = Name, _Address = Address, _Address2 = Address2, _City = City, _State = State, _Zipcode = Zipcode, _Contact1 = Contact1, _Contact2 = Contact2, _Phone1 = Phone1, _Phone2 = Phone2, _Email = Email, _RestaurantID = RestaurantID, _Web = Web, _Menu = Menu, _imagekey = imagekey, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Restaurants({String? id, String? Name, String? Address, String? Address2, String? City, String? State, int? Zipcode, String? Contact1, String? Contact2, String? Phone1, String? Phone2, String? Email, String? RestaurantID, String? Web, String? Menu}) {
+  factory Restaurants({String? id, String? Name, String? Address, String? Address2, String? City, String? State, int? Zipcode, String? Contact1, String? Contact2, String? Phone1, String? Phone2, String? Email, String? RestaurantID, String? Web, String? Menu, String? imagekey}) {
     return Restaurants._internal(
       id: id == null ? UUID.getUUID() : id,
       Name: Name,
@@ -135,7 +140,8 @@ class Restaurants extends Model {
       Email: Email,
       RestaurantID: RestaurantID,
       Web: Web,
-      Menu: Menu);
+      Menu: Menu,
+      imagekey: imagekey);
   }
   
   bool equals(Object other) {
@@ -160,7 +166,8 @@ class Restaurants extends Model {
       _Email == other._Email &&
       _RestaurantID == other._RestaurantID &&
       _Web == other._Web &&
-      _Menu == other._Menu;
+      _Menu == other._Menu &&
+      _imagekey == other._imagekey;
   }
   
   @override
@@ -186,6 +193,7 @@ class Restaurants extends Model {
     buffer.write("RestaurantID=" + "$_RestaurantID" + ", ");
     buffer.write("Web=" + "$_Web" + ", ");
     buffer.write("Menu=" + "$_Menu" + ", ");
+    buffer.write("imagekey=" + "$_imagekey" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -193,7 +201,7 @@ class Restaurants extends Model {
     return buffer.toString();
   }
   
-  Restaurants copyWith({String? id, String? Name, String? Address, String? Address2, String? City, String? State, int? Zipcode, String? Contact1, String? Contact2, String? Phone1, String? Phone2, String? Email, String? RestaurantID, String? Web, String? Menu}) {
+  Restaurants copyWith({String? id, String? Name, String? Address, String? Address2, String? City, String? State, int? Zipcode, String? Contact1, String? Contact2, String? Phone1, String? Phone2, String? Email, String? RestaurantID, String? Web, String? Menu, String? imagekey}) {
     return Restaurants._internal(
       id: id ?? this.id,
       Name: Name ?? this.Name,
@@ -209,7 +217,8 @@ class Restaurants extends Model {
       Email: Email ?? this.Email,
       RestaurantID: RestaurantID ?? this.RestaurantID,
       Web: Web ?? this.Web,
-      Menu: Menu ?? this.Menu);
+      Menu: Menu ?? this.Menu,
+      imagekey: imagekey ?? this.imagekey);
   }
   
   Restaurants.fromJson(Map<String, dynamic> json)  
@@ -228,11 +237,12 @@ class Restaurants extends Model {
       _RestaurantID = json['RestaurantID'],
       _Web = json['Web'],
       _Menu = json['Menu'],
+      _imagekey = json['imagekey'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'Name': _Name, 'Address': _Address, 'Address2': _Address2, 'City': _City, 'State': _State, 'Zipcode': _Zipcode, 'Contact1': _Contact1, 'Contact2': _Contact2, 'Phone1': _Phone1, 'Phone2': _Phone2, 'Email': _Email, 'RestaurantID': _RestaurantID, 'Web': _Web, 'Menu': _Menu, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'Name': _Name, 'Address': _Address, 'Address2': _Address2, 'City': _City, 'State': _State, 'Zipcode': _Zipcode, 'Contact1': _Contact1, 'Contact2': _Contact2, 'Phone1': _Phone1, 'Phone2': _Phone2, 'Email': _Email, 'RestaurantID': _RestaurantID, 'Web': _Web, 'Menu': _Menu, 'imagekey': _imagekey, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
   static final QueryField ID = QueryField(fieldName: "restaurants.id");
@@ -250,6 +260,7 @@ class Restaurants extends Model {
   static final QueryField RESTAURANTID = QueryField(fieldName: "RestaurantID");
   static final QueryField WEB = QueryField(fieldName: "Web");
   static final QueryField MENU = QueryField(fieldName: "Menu");
+  static final QueryField IMAGEKEY = QueryField(fieldName: "imagekey");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Restaurants";
     modelSchemaDefinition.pluralName = "Restaurants";
@@ -347,6 +358,12 @@ class Restaurants extends Model {
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Restaurants.MENU,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Restaurants.IMAGEKEY,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));

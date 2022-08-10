@@ -10,6 +10,24 @@
       "StackName": "amplify-hungerheroescopy-staging-191443",
       "StackId": "arn:aws:cloudformation:us-east-2:754404958569:stack/amplify-hungerheroescopy-staging-191443/b75af220-0604-11ed-945a-06f66f7863be",
       "AmplifyAppId": "d3sdlct8kz6qc0"
+    },
+    "categories": {
+      "auth": {
+        "hungerheroescopyabd24781": {
+          "userPoolId": "us-east-2_a0YP3AOuA",
+          "userPoolName": "HungerHeroesCopy-staging",
+          "webClientId": "4r31g5gri8dbc2srjed7d0ue2p",
+          "nativeClientId": "4r31g5gri8dbc2srjed7d0ue2p",
+          "identityPoolId": "us-east-2:4ee2901d-df41-4eb0-8529-eecc1dc6a9ab",
+          "identityPoolName": "testAuthIdentityPool__staging",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-staging-191443-authRole",
+          "authRoleName": "amplify-hungerheroescopy-staging-191443-authRole",
+          "unauthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-staging-191443-unauthRole",
+          "unauthRoleName": "amplify-hungerheroescopy-staging-191443-unauthRole"
+        },
+        "HungerHeroesCopy": {}
+      }
     }
   }
 }

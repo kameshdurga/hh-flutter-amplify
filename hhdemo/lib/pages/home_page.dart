@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hhdemo/pages/restaurant_image.dart';
+import 'package:hhdemo/services/storage_service.dart';
 import '../models/ModelProvider.dart';
 
 import '../services/api_service.dart';
@@ -29,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _getRestaurants() async {
     try {
       final restaurants = await _apiService.getRestaurants();
+
       setState(() {
         _restaurants =
             restaurants?.whereType<Restaurants>().toList() ?? const [];
@@ -58,16 +61,22 @@ class _HomePageState extends State<HomePage> {
       itemCount: _restaurants.length,
       itemBuilder: (context, index) {
         final _restaurantItem = _restaurants[index];
-        return ListTile(
-          leading: Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: Text('${_restaurantItem.Name}'),
-          ),
-          title: Text('${_restaurantItem.City}'),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-          ),
-        );
+        // return ListTile(
+        //   // leading: Padding(
+        //   //   padding: const EdgeInsets.all(2.0),
+        //   //   child: Text('${_restaurantItem.Name}'),
+        //   // ),
+        //   leading: RestaurantImagePage(imageKey: _restaurantItem.imagekey!),
+        //   title: Text('${_restaurantItem.City}'),
+        //   subtitle: Text('${_restaurantItem.Name}'),
+        //   trailing: Row(
+        //     mainAxisSize: MainAxisSize.min,
+        //   ),
+        // );
+        return RestaurantImagePage(
+            imageKey: _restaurantItem.imagekey!,
+            name: _restaurantItem.Name!,
+            city: _restaurantItem.City!);
       },
       separatorBuilder: (BuildContext context, int index) {
         return const Divider(
