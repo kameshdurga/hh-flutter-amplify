@@ -40,7 +40,7 @@ class _RestaurantImagePageState extends State<RestaurantImagePage> {
 
       setState(() {
         _imagekey = imageUrl?.url ?? "";
-        print("got imagekey " + _imagekey!);
+        print("got imagekey " + _imagekey);
       });
     } on Exception catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

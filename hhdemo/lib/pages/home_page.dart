@@ -73,10 +73,15 @@ class _HomePageState extends State<HomePage> {
         //     mainAxisSize: MainAxisSize.min,
         //   ),
         // );
-        return RestaurantImagePage(
-            imageKey: _restaurantItem.imagekey!,
-            name: _restaurantItem.Name!,
-            city: _restaurantItem.City!);
+
+        return GestureDetector(
+            onTap: () {
+              print("Container clicked" + _restaurantItem.Name!);
+            },
+            child: RestaurantImagePage(
+                imageKey: _restaurantItem.imagekey!,
+                name: _restaurantItem.Name!,
+                city: _restaurantItem.City!));
       },
       separatorBuilder: (BuildContext context, int index) {
         return const Divider(
