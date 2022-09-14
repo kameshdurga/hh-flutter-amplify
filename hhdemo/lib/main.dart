@@ -2,17 +2,44 @@ import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
-import 'package:flutter/material.dart';
 import 'package:hhdemo/models/Restaurants.dart';
+import 'package:hhdemo/pages/cart_page.dart';
 import 'package:hhdemo/pages/home_page.dart';
+import 'package:provider/provider.dart';
 import '../services/api_service.dart';
 import 'amplifyconfiguration.dart';
+import 'models/Cart.dart';
 import 'models/ModelProvider.dart';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        // The user provider uses a value constructor because the value
+        // already exists, and we want to make sure we're using the same user
+
+        // Store and Cart are both needed on the home page,
+        // so they're provided right off the bat
+        ChangeNotifierProvider<Cart>(create: (_) => Cart()),
+      ],
+      child: const MyApp(),
+
+      // child: MaterialApp(
+      //   title: 'Provider Demo',
+      //   initialRoute: '/',
+      //   routes: {
+      //     '/': (context) => const MyApp(),
+      //     '/cart': (context) => const MyCart(),
+      //   },
+      // ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -156,15 +183,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // return MaterialApp(
+    //   home: buildApp(context),
+    //   scaffoldMessengerKey: scaffoldMessengerKey,
+    // );
+
     return MaterialApp(
       home: buildApp(context),
       scaffoldMessengerKey: scaffoldMessengerKey,
+      title: 'Provider Demo',
+      initialRoute: '/',
+      routes: {
+        '/cart': (context) => const MyCart(),
+      },
     );
   }
 
   Widget buildApp(BuildContext context) {
     return _amplifyConfigured
-        ? const HomePage(title: 'Amplify Restaurants')
+        ? const HomePage(title: 'Restaurants')
         : _waitForAmplify();
   }
 

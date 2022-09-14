@@ -204,7 +204,7 @@ class OrderItem extends Model {
     'id': id, 'OrderID': _OrderID, 'LineItems': _LineItems, 'UserID': _UserID, 'SubTotal': _SubTotal, 'Tax': _Tax, 'untitledfield': _untitledfield, 'ServiceFee': _ServiceFee, 'Total': _Total, 'CreatedAt': _CreatedAt?.toSeconds(), 'usersID': _usersID, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
-  static final QueryField ID = QueryField(fieldName: "orderItem.id");
+  static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField ORDERID = QueryField(fieldName: "OrderID");
   static final QueryField LINEITEMS = QueryField(fieldName: "LineItems");
   static final QueryField USERID = QueryField(fieldName: "UserID");

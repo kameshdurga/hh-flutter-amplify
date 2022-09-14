@@ -245,7 +245,7 @@ class Restaurants extends Model {
     'id': id, 'Name': _Name, 'Address': _Address, 'Address2': _Address2, 'City': _City, 'State': _State, 'Zipcode': _Zipcode, 'Contact1': _Contact1, 'Contact2': _Contact2, 'Phone1': _Phone1, 'Phone2': _Phone2, 'Email': _Email, 'RestaurantID': _RestaurantID, 'Web': _Web, 'Menu': _Menu, 'imagekey': _imagekey, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
-  static final QueryField ID = QueryField(fieldName: "restaurants.id");
+  static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField NAME = QueryField(fieldName: "Name");
   static final QueryField ADDRESS = QueryField(fieldName: "Address");
   static final QueryField ADDRESS2 = QueryField(fieldName: "Address2");

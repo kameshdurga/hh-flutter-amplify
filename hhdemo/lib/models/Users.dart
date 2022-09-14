@@ -131,7 +131,7 @@ class Users extends Model {
     'id': id, 'UserID': _UserID, 'UserStatus': _UserStatus, 'OrderItems': _OrderItems?.map((OrderItem? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
-  static final QueryField ID = QueryField(fieldName: "users.id");
+  static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField USERID = QueryField(fieldName: "UserID");
   static final QueryField USERSTATUS = QueryField(fieldName: "UserStatus");
   static final QueryField ORDERITEMS = QueryField(

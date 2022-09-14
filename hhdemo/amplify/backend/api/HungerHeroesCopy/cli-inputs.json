@@ -3,11 +3,11 @@
   "serviceConfiguration": {
     "apiName": "HungerHeroesCopy",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-047ba122-bc6f-4d87-97a9-768387842bce/amplify/backend/api/HungerHeroesCopy/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "keyDescription": "api key description",
-      "expirationTime": 30
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2023-09-05T23:40:07.027Z",
+      "keyDescription": "secondapikey"
     },
     "additionalAuthTypes": [
       {

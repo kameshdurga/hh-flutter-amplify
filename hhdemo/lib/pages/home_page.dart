@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hhdemo/pages/restaurant_image.dart';
-import 'package:hhdemo/services/storage_service.dart';
+import 'package:hhdemo/pages/restaurant_menu.dart';
 import '../models/ModelProvider.dart';
 
 import '../services/api_service.dart';
@@ -77,6 +77,13 @@ class _HomePageState extends State<HomePage> {
         return GestureDetector(
             onTap: () {
               print("Container clicked" + _restaurantItem.Name!);
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => RestaurantMenuPage(
+                          name: _restaurantItem.Name!,
+                          menu: _restaurantItem.Menu!)));
             },
             child: RestaurantImagePage(
                 imageKey: _restaurantItem.imagekey!,
