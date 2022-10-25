@@ -19,4 +19,16 @@ class Menu {
     final imageKey = data['imageKey'] as String;
     return Menu(item: item, price: price, imageKey: imageKey);
   }
+
+  // Define that two persons are equal if their SSNs are equal
+  @override
+  bool operator ==(other) {
+    final equalCheck = (other is Menu) && (other.item == item);
+    print("both are equal");
+    return equalCheck;
+  }
+
+  // TODO: implement hashCode
+  @override
+  int get hashCode => item.hashCode;
 }

@@ -69,6 +69,8 @@ PODS:
     - AWSCore (= 2.27.9)
   - Flutter (1.0.0)
   - ObjectMapper (4.2.0)
+  - pay_ios (0.0.1):
+    - Flutter
   - Starscream (4.0.4)
   - SwiftFormat/CLI (0.49.9)
   - SwiftLint (0.47.1)
@@ -80,6 +82,7 @@ DEPENDENCIES:
   - amplify_flutter (from `.symlinks/plugins/amplify_flutter/ios`)
   - amplify_storage_s3_ios (from `.symlinks/plugins/amplify_storage_s3_ios/ios`)
   - Flutter (from `Flutter`)
+  - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
 
 SPEC REPOS:
   trunk:
@@ -111,6 +114,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/amplify_storage_s3_ios/ios"
   Flutter:
     :path: Flutter
+  pay_ios:
+    :path: ".symlinks/plugins/pay_ios/ios"
 
 SPEC CHECKSUMS:
   Amplify: 010d6a71db20812d9e3062db1fe827393d01e584
@@ -128,12 +133,13 @@ SPEC CHECKSUMS:
   AWSMobileClient: f942269e300b23031fbd62892e5642d3cf35cb97
   AWSPluginsCore: 120cfa265293694921b6595fe00d1cb5ab558847
   AWSS3: e2040a6ddf05ae4cef4abe2b9d91295deef92565
-  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftFormat: 016c15401d06959ef9f81d7956462e91f55b8ac5
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: 00461743cae59e8eab13cc6834ec3cb06b87fa2c
+PODFILE CHECKSUM: f302ba7a13ea52a2f24d0294e52988da13435ae9
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2

@@ -54,6 +54,8 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
   Widget build(BuildContext context) {
     print("menu from widget is " + widget.menu);
 
+    var cart = context.watch<Cart>();
+
     final parsedJson = jsonDecode(widget.menu);
 
     final menuItems = MenuItems.fromJson(parsedJson);
@@ -204,6 +206,7 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
   }
 
   Widget _buildListItem(Menu item) {
+    // ignore: unnecessary_new
     return new Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
       child: new Column(
@@ -219,6 +222,11 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
             child: new Text("\$" + item.price),
             alignment: FractionalOffset.topLeft,
           ),
+          // ignore: unnecessary_new
+          new Align(
+            child: Text(context.read<Cart>().prodQuantity(item).toString()),
+            alignment: FractionalOffset.topRight,
+          ),
           new Align(
             child: IconButton(
               icon: const Icon(Icons.add),
@@ -228,6 +236,7 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
             ),
             alignment: FractionalOffset.centerRight,
           ),
+
           // new Align(
           //   child: new Text("More stuff $item.item"),
           //   alignment: FractionalOffset.topLeft,

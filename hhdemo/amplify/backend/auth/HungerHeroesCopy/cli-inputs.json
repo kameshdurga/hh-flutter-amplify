@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "hunger62558d48",
     "userPoolName": "HungerHeroesCopy",
     "autoVerifiedAttributes": [
@@ -36,7 +36,9 @@
     ],
     "useDefault": "default",
     "userPoolGroups": false,
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+      "testpool"
+    ],
     "adminQueries": false,
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,

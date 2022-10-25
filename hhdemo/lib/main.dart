@@ -14,10 +14,16 @@ import 'models/ModelProvider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+// main.dart
+// import 'package:flutter_stripe/flutter_stripe.dart';
 
 final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Stripe.publishableKey =
+  //     "pk_test_51LhlbyE1xegtq2U8GJnfRmfidAobw7Td9I1Ds4Yx7W7JB0JM1MYCCNSIEgApJws6CnB1tbwiO6Bl5DdKibOi1ean00k8anJcMD";
+
   runApp(
     MultiProvider(
       providers: [

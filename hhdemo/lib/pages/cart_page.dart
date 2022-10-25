@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:hhdemo/pages/payment_page.dart';
 import 'package:provider/provider.dart';
 
 import '../models/Cart.dart';
@@ -65,6 +66,10 @@ class _CartList extends StatelessWidget {
           cart.products[index].item,
           style: itemNameStyle,
         ),
+        subtitle: Text(
+          cart.prodQuantity(cart.products[index]).toString(),
+          style: itemNameStyle,
+        ),
       ),
     );
   }
@@ -94,11 +99,11 @@ class _CartTotal extends StatelessWidget {
             const SizedBox(width: 24),
             TextButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Buying not supported yet.')));
+                // Navigator.push(
+                //     context, MaterialPageRoute(builder: (_) => ApplePay()));
               },
               style: TextButton.styleFrom(),
-              child: const Text('Proceed to Pay'),
+              child: const Text('Donate'),
             ),
           ],
         ),

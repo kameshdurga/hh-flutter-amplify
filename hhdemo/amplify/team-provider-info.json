@@ -26,7 +26,8 @@
           "unauthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-staging-191443-unauthRole",
           "unauthRoleName": "amplify-hungerheroescopy-staging-191443-unauthRole"
         },
-        "HungerHeroesCopy": {}
+        "HungerHeroesCopy": {},
+        "true": {}
       }
     }
   }
