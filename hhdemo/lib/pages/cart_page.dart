@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hhdemo/pages/payment_page.dart';
 import 'package:provider/provider.dart';
 
@@ -98,9 +99,11 @@ class _CartTotal extends StatelessWidget {
                     Text('\$${cart.total}', style: hugeStyle)),
             const SizedBox(width: 24),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 // Navigator.push(
                 //     context, MaterialPageRoute(builder: (_) => ApplePay()));
+
+                await Stripe.instance.presentPaymentSheet();
               },
               style: TextButton.styleFrom(),
               child: const Text('Donate'),
@@ -110,4 +113,39 @@ class _CartTotal extends StatelessWidget {
       ),
     );
   }
+
+  // Future<void> initPaymentSheet() async {
+  //   try {
+  //     // 1. create payment intent on the server
+  //     final data = await createTestPaymentSheet();
+
+  //     // 2. initialize the payment sheet
+  //     await Stripe.instance.initPaymentSheet(
+  //       paymentSheetParameters: SetupPaymentSheetParameters(
+  //         // Enable custom flow
+  //         customFlow: true,
+  //         // Main params
+  //         merchantDisplayName: 'Flutter Stripe Store Demo',
+  //         paymentIntentClientSecret: data['paymentIntent'],
+  //         // Customer keys
+  //         customerEphemeralKeySecret: data['ephemeralKey'],
+  //         customerId: data['customer'],
+  //         // Extra options
+  //         applePay: PaymentSheetApplePay(
+  //           merchantCountryCode: 'DE',
+  //         ),
+  //         googlePay: PaymentSheetGooglePay(merchantCountryCode: 'DE'),
+  //         style: ThemeMode.dark,
+  //       ),
+  //     );
+  //     setState(() {
+  //       step = 1;
+  //     });
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Error: $e')),
+  //     );
+  //     rethrow;
+  //   }
+  // }
 }
