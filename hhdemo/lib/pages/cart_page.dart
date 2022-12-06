@@ -3,11 +3,10 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:hhdemo/pages/payment_page.dart';
 import 'package:provider/provider.dart';
 
 import '../models/Cart.dart';
+import 'package:pay/pay.dart';
 
 class MyCart extends StatelessWidget {
   const MyCart({Key? key}) : super(key: key);
@@ -76,6 +75,14 @@ class _CartList extends StatelessWidget {
   }
 }
 
+const _paymentItems = [
+  PaymentItem(
+    label: 'Total',
+    amount: '99.99',
+    status: PaymentItemStatus.final_price,
+  )
+];
+
 class _CartTotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -98,15 +105,33 @@ class _CartTotal extends StatelessWidget {
                 builder: (context, cart, child) =>
                     Text('\$${cart.total}', style: hugeStyle)),
             const SizedBox(width: 24),
-            TextButton(
-              onPressed: () async {
-                // Navigator.push(
-                //     context, MaterialPageRoute(builder: (_) => ApplePay()));
+            // TextButton(
+            //   onPressed: () async {
+            //     // Navigator.push(
+            //     //     context, MaterialPageRoute(builder: (_) => ApplePay()));
 
-                await Stripe.instance.presentPaymentSheet();
+            //     await Stripe.instance.presentPaymentSheet();
+            //   },
+            //   style: TextButton.styleFrom(),
+            //   child: const Text('Donate'),
+            // ),
+            ApplePayButton(
+              paymentConfigurationAsset: '/applepay.json',
+              paymentItems: _paymentItems,
+              style: ApplePayButtonStyle.black,
+              type: ApplePayButtonType.buy,
+              width: 200,
+              height: 50,
+              margin: const EdgeInsets.only(top: 15.0),
+              onPaymentResult: (value) {
+                print(value);
               },
-              style: TextButton.styleFrom(),
-              child: const Text('Donate'),
+              onError: (error) {
+                print(error);
+              },
+              loadingIndicator: const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ],
         ),
@@ -132,7 +157,7 @@ class _CartTotal extends StatelessWidget {
   //         customerId: data['customer'],
   //         // Extra options
   //         applePay: PaymentSheetApplePay(
-  //           merchantCountryCode: 'DE',
+  //           merchantCountryCode: 'US',
   //         ),
   //         googlePay: PaymentSheetGooglePay(merchantCountryCode: 'DE'),
   //         style: ThemeMode.dark,

@@ -72,8 +72,31 @@ PODS:
   - pay_ios (0.0.1):
     - Flutter
   - Starscream (4.0.4)
+  - Stripe (22.8.1):
+    - Stripe/Stripe3DS2 (= 22.8.1)
+    - StripeApplePay (= 22.8.1)
+    - StripeCore (= 22.8.1)
+    - StripeUICore (= 22.8.1)
+  - Stripe/Stripe3DS2 (22.8.1):
+    - StripeApplePay (= 22.8.1)
+    - StripeCore (= 22.8.1)
+    - StripeUICore (= 22.8.1)
+  - stripe_ios (0.0.1):
+    - Flutter
+    - Stripe (~> 22.8.1)
+    - StripeFinancialConnections (~> 22.8.1)
+  - StripeApplePay (22.8.1):
+    - StripeCore (= 22.8.1)
+  - StripeCore (22.8.1)
+  - StripeFinancialConnections (22.8.1):
+    - StripeCore (= 22.8.1)
+    - StripeUICore (= 22.8.1)
+  - StripeUICore (22.8.1):
+    - StripeCore (= 22.8.1)
   - SwiftFormat/CLI (0.49.9)
   - SwiftLint (0.47.1)
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - amplify_api (from `.symlinks/plugins/amplify_api/ios`)
@@ -83,6 +106,8 @@ DEPENDENCIES:
   - amplify_storage_s3_ios (from `.symlinks/plugins/amplify_storage_s3_ios/ios`)
   - Flutter (from `Flutter`)
   - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
+  - stripe_ios (from `.symlinks/plugins/stripe_ios/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
@@ -98,6 +123,11 @@ SPEC REPOS:
     - AWSS3
     - ObjectMapper
     - Starscream
+    - Stripe
+    - StripeApplePay
+    - StripeCore
+    - StripeFinancialConnections
+    - StripeUICore
     - SwiftFormat
     - SwiftLint
 
@@ -116,6 +146,10 @@ EXTERNAL SOURCES:
     :path: Flutter
   pay_ios:
     :path: ".symlinks/plugins/pay_ios/ios"
+  stripe_ios:
+    :path: ".symlinks/plugins/stripe_ios/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
   Amplify: 010d6a71db20812d9e3062db1fe827393d01e584
@@ -137,9 +171,16 @@ SPEC CHECKSUMS:
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  Stripe: b4cf3aa317a8e984b930d3545bac10b490dd3106
+  stripe_ios: 8ad17b19d7d2189d7c19fd15d9ecffeca696390f
+  StripeApplePay: 858c1dadc39b658d317661dea8cc2b7158533a17
+  StripeCore: 52e0aba2fad604455692db593bf5edc04758b760
+  StripeFinancialConnections: 40f6c8f86a4ddfcfe981d4da343828637abb3e69
+  StripeUICore: b3d64c5cbcb4cacfa88f9a0950cdf1b4df72792e
   SwiftFormat: 016c15401d06959ef9f81d7956462e91f55b8ac5
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
+  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
-PODFILE CHECKSUM: f302ba7a13ea52a2f24d0294e52988da13435ae9
+PODFILE CHECKSUM: 0c43f760e0901e89a19af6b86ddf48bae2c64a5b
 
 COCOAPODS: 1.11.2

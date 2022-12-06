@@ -1,0 +1,21 @@
+{
+  "provider": "apple_pay",
+  "data": {
+    "merchantIdentifier": "merchant.net.hungerheroes",
+    "displayName": "Test Name",
+    "merchantCapabilities": [
+      "3DS",
+      "debit",
+      "credit"
+    ],
+    "supportedNetworks": [
+      "amex",
+      "visa",
+      "masterCard"
+    ],
+    "countryCode": "US",
+    "currencyCode": "USD",
+    "requiredBillingContactFields": null, 
+    "requiredShippingContactFields": null
+  }
+}
