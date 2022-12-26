@@ -36,15 +36,6 @@ void main() {
         ChangeNotifierProvider<Cart>(create: (_) => Cart()),
       ],
       child: const MyApp(),
-
-      // child: MaterialApp(
-      //   title: 'Provider Demo',
-      //   initialRoute: '/',
-      //   routes: {
-      //     '/': (context) => const MyApp(),
-      //     '/cart': (context) => const MyCart(),
-      //   },
-      // ),
     ),
   );
 }

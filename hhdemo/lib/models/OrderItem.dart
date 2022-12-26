@@ -28,16 +28,16 @@ import 'package:flutter/foundation.dart';
 class OrderItem extends Model {
   static const classType = const _OrderItemModelType();
   final String id;
-  final String? _OrderID;
-  final String? _LineItems;
-  final String? _UserID;
-  final double? _SubTotal;
-  final double? _Tax;
-  final String? _untitledfield;
-  final double? _ServiceFee;
-  final double? _Total;
+  final String? _LineItemId;
+  final String? _ShopId;
+  final String? _ItemSKU;
+  final String? _RecipientID;
+  final String? _Status;
+  final TemporalTimestamp? _UpdatedTime;
   final TemporalTimestamp? _CreatedAt;
   final String? _usersID;
+  final TemporalTimestamp? _statusTime;
+  final String? _ShardID;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -49,36 +49,28 @@ class OrderItem extends Model {
     return id;
   }
   
-  String? get OrderID {
-    return _OrderID;
+  String? get LineItemId {
+    return _LineItemId;
   }
   
-  String? get LineItems {
-    return _LineItems;
+  String? get ShopId {
+    return _ShopId;
   }
   
-  String? get UserID {
-    return _UserID;
+  String? get ItemSKU {
+    return _ItemSKU;
   }
   
-  double? get SubTotal {
-    return _SubTotal;
+  String? get RecipientID {
+    return _RecipientID;
   }
   
-  double? get Tax {
-    return _Tax;
+  String? get Status {
+    return _Status;
   }
   
-  String? get untitledfield {
-    return _untitledfield;
-  }
-  
-  double? get ServiceFee {
-    return _ServiceFee;
-  }
-  
-  double? get Total {
-    return _Total;
+  TemporalTimestamp? get UpdatedTime {
+    return _UpdatedTime;
   }
   
   TemporalTimestamp? get CreatedAt {
@@ -98,6 +90,14 @@ class OrderItem extends Model {
     }
   }
   
+  TemporalTimestamp? get statusTime {
+    return _statusTime;
+  }
+  
+  String? get ShardID {
+    return _ShardID;
+  }
+  
   TemporalDateTime? get createdAt {
     return _createdAt;
   }
@@ -106,21 +106,21 @@ class OrderItem extends Model {
     return _updatedAt;
   }
   
-  const OrderItem._internal({required this.id, OrderID, LineItems, UserID, SubTotal, Tax, untitledfield, ServiceFee, Total, CreatedAt, required usersID, createdAt, updatedAt}): _OrderID = OrderID, _LineItems = LineItems, _UserID = UserID, _SubTotal = SubTotal, _Tax = Tax, _untitledfield = untitledfield, _ServiceFee = ServiceFee, _Total = Total, _CreatedAt = CreatedAt, _usersID = usersID, _createdAt = createdAt, _updatedAt = updatedAt;
+  const OrderItem._internal({required this.id, LineItemId, ShopId, ItemSKU, RecipientID, Status, UpdatedTime, CreatedAt, required usersID, statusTime, ShardID, createdAt, updatedAt}): _LineItemId = LineItemId, _ShopId = ShopId, _ItemSKU = ItemSKU, _RecipientID = RecipientID, _Status = Status, _UpdatedTime = UpdatedTime, _CreatedAt = CreatedAt, _usersID = usersID, _statusTime = statusTime, _ShardID = ShardID, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory OrderItem({String? id, String? OrderID, String? LineItems, String? UserID, double? SubTotal, double? Tax, String? untitledfield, double? ServiceFee, double? Total, TemporalTimestamp? CreatedAt, required String usersID}) {
+  factory OrderItem({String? id, String? LineItemId, String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, required String usersID, TemporalTimestamp? statusTime, String? ShardID}) {
     return OrderItem._internal(
       id: id == null ? UUID.getUUID() : id,
-      OrderID: OrderID,
-      LineItems: LineItems,
-      UserID: UserID,
-      SubTotal: SubTotal,
-      Tax: Tax,
-      untitledfield: untitledfield,
-      ServiceFee: ServiceFee,
-      Total: Total,
+      LineItemId: LineItemId,
+      ShopId: ShopId,
+      ItemSKU: ItemSKU,
+      RecipientID: RecipientID,
+      Status: Status,
+      UpdatedTime: UpdatedTime,
       CreatedAt: CreatedAt,
-      usersID: usersID);
+      usersID: usersID,
+      statusTime: statusTime,
+      ShardID: ShardID);
   }
   
   bool equals(Object other) {
@@ -132,16 +132,16 @@ class OrderItem extends Model {
     if (identical(other, this)) return true;
     return other is OrderItem &&
       id == other.id &&
-      _OrderID == other._OrderID &&
-      _LineItems == other._LineItems &&
-      _UserID == other._UserID &&
-      _SubTotal == other._SubTotal &&
-      _Tax == other._Tax &&
-      _untitledfield == other._untitledfield &&
-      _ServiceFee == other._ServiceFee &&
-      _Total == other._Total &&
+      _LineItemId == other._LineItemId &&
+      _ShopId == other._ShopId &&
+      _ItemSKU == other._ItemSKU &&
+      _RecipientID == other._RecipientID &&
+      _Status == other._Status &&
+      _UpdatedTime == other._UpdatedTime &&
       _CreatedAt == other._CreatedAt &&
-      _usersID == other._usersID;
+      _usersID == other._usersID &&
+      _statusTime == other._statusTime &&
+      _ShardID == other._ShardID;
   }
   
   @override
@@ -153,16 +153,16 @@ class OrderItem extends Model {
     
     buffer.write("OrderItem {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("OrderID=" + "$_OrderID" + ", ");
-    buffer.write("LineItems=" + "$_LineItems" + ", ");
-    buffer.write("UserID=" + "$_UserID" + ", ");
-    buffer.write("SubTotal=" + (_SubTotal != null ? _SubTotal!.toString() : "null") + ", ");
-    buffer.write("Tax=" + (_Tax != null ? _Tax!.toString() : "null") + ", ");
-    buffer.write("untitledfield=" + "$_untitledfield" + ", ");
-    buffer.write("ServiceFee=" + (_ServiceFee != null ? _ServiceFee!.toString() : "null") + ", ");
-    buffer.write("Total=" + (_Total != null ? _Total!.toString() : "null") + ", ");
+    buffer.write("LineItemId=" + "$_LineItemId" + ", ");
+    buffer.write("ShopId=" + "$_ShopId" + ", ");
+    buffer.write("ItemSKU=" + "$_ItemSKU" + ", ");
+    buffer.write("RecipientID=" + "$_RecipientID" + ", ");
+    buffer.write("Status=" + "$_Status" + ", ");
+    buffer.write("UpdatedTime=" + (_UpdatedTime != null ? _UpdatedTime!.toString() : "null") + ", ");
     buffer.write("CreatedAt=" + (_CreatedAt != null ? _CreatedAt!.toString() : "null") + ", ");
     buffer.write("usersID=" + "$_usersID" + ", ");
+    buffer.write("statusTime=" + (_statusTime != null ? _statusTime!.toString() : "null") + ", ");
+    buffer.write("ShardID=" + "$_ShardID" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -170,51 +170,51 @@ class OrderItem extends Model {
     return buffer.toString();
   }
   
-  OrderItem copyWith({String? id, String? OrderID, String? LineItems, String? UserID, double? SubTotal, double? Tax, String? untitledfield, double? ServiceFee, double? Total, TemporalTimestamp? CreatedAt, String? usersID}) {
+  OrderItem copyWith({String? id, String? LineItemId, String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, String? usersID, TemporalTimestamp? statusTime, String? ShardID}) {
     return OrderItem._internal(
       id: id ?? this.id,
-      OrderID: OrderID ?? this.OrderID,
-      LineItems: LineItems ?? this.LineItems,
-      UserID: UserID ?? this.UserID,
-      SubTotal: SubTotal ?? this.SubTotal,
-      Tax: Tax ?? this.Tax,
-      untitledfield: untitledfield ?? this.untitledfield,
-      ServiceFee: ServiceFee ?? this.ServiceFee,
-      Total: Total ?? this.Total,
+      LineItemId: LineItemId ?? this.LineItemId,
+      ShopId: ShopId ?? this.ShopId,
+      ItemSKU: ItemSKU ?? this.ItemSKU,
+      RecipientID: RecipientID ?? this.RecipientID,
+      Status: Status ?? this.Status,
+      UpdatedTime: UpdatedTime ?? this.UpdatedTime,
       CreatedAt: CreatedAt ?? this.CreatedAt,
-      usersID: usersID ?? this.usersID);
+      usersID: usersID ?? this.usersID,
+      statusTime: statusTime ?? this.statusTime,
+      ShardID: ShardID ?? this.ShardID);
   }
   
   OrderItem.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _OrderID = json['OrderID'],
-      _LineItems = json['LineItems'],
-      _UserID = json['UserID'],
-      _SubTotal = (json['SubTotal'] as num?)?.toDouble(),
-      _Tax = (json['Tax'] as num?)?.toDouble(),
-      _untitledfield = json['untitledfield'],
-      _ServiceFee = (json['ServiceFee'] as num?)?.toDouble(),
-      _Total = (json['Total'] as num?)?.toDouble(),
+      _LineItemId = json['LineItemId'],
+      _ShopId = json['ShopId'],
+      _ItemSKU = json['ItemSKU'],
+      _RecipientID = json['RecipientID'],
+      _Status = json['Status'],
+      _UpdatedTime = json['UpdatedTime'] != null ? TemporalTimestamp.fromSeconds(json['UpdatedTime']) : null,
       _CreatedAt = json['CreatedAt'] != null ? TemporalTimestamp.fromSeconds(json['CreatedAt']) : null,
       _usersID = json['usersID'],
+      _statusTime = json['statusTime'] != null ? TemporalTimestamp.fromSeconds(json['statusTime']) : null,
+      _ShardID = json['ShardID'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'OrderID': _OrderID, 'LineItems': _LineItems, 'UserID': _UserID, 'SubTotal': _SubTotal, 'Tax': _Tax, 'untitledfield': _untitledfield, 'ServiceFee': _ServiceFee, 'Total': _Total, 'CreatedAt': _CreatedAt?.toSeconds(), 'usersID': _usersID, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'LineItemId': _LineItemId, 'ShopId': _ShopId, 'ItemSKU': _ItemSKU, 'RecipientID': _RecipientID, 'Status': _Status, 'UpdatedTime': _UpdatedTime?.toSeconds(), 'CreatedAt': _CreatedAt?.toSeconds(), 'usersID': _usersID, 'statusTime': _statusTime?.toSeconds(), 'ShardID': _ShardID, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
   static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField ORDERID = QueryField(fieldName: "OrderID");
-  static final QueryField LINEITEMS = QueryField(fieldName: "LineItems");
-  static final QueryField USERID = QueryField(fieldName: "UserID");
-  static final QueryField SUBTOTAL = QueryField(fieldName: "SubTotal");
-  static final QueryField TAX = QueryField(fieldName: "Tax");
-  static final QueryField UNTITLEDFIELD = QueryField(fieldName: "untitledfield");
-  static final QueryField SERVICEFEE = QueryField(fieldName: "ServiceFee");
-  static final QueryField TOTAL = QueryField(fieldName: "Total");
+  static final QueryField LINEITEMID = QueryField(fieldName: "LineItemId");
+  static final QueryField SHOPID = QueryField(fieldName: "ShopId");
+  static final QueryField ITEMSKU = QueryField(fieldName: "ItemSKU");
+  static final QueryField RECIPIENTID = QueryField(fieldName: "RecipientID");
+  static final QueryField STATUS = QueryField(fieldName: "Status");
+  static final QueryField UPDATEDTIME = QueryField(fieldName: "UpdatedTime");
   static final QueryField CREATEDAT = QueryField(fieldName: "CreatedAt");
   static final QueryField USERSID = QueryField(fieldName: "usersID");
+  static final QueryField STATUSTIME = QueryField(fieldName: "statusTime");
+  static final QueryField SHARDID = QueryField(fieldName: "ShardID");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "OrderItem";
     modelSchemaDefinition.pluralName = "OrderItems";
@@ -233,51 +233,39 @@ class OrderItem extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: OrderItem.ORDERID,
+      key: OrderItem.LINEITEMID,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: OrderItem.LINEITEMS,
+      key: OrderItem.SHOPID,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: OrderItem.USERID,
+      key: OrderItem.ITEMSKU,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: OrderItem.SUBTOTAL,
-      isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.double)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: OrderItem.TAX,
-      isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.double)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: OrderItem.UNTITLEDFIELD,
+      key: OrderItem.RECIPIENTID,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: OrderItem.SERVICEFEE,
+      key: OrderItem.STATUS,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.double)
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: OrderItem.TOTAL,
+      key: OrderItem.UPDATEDTIME,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.double)
+      ofType: ModelFieldType(ModelFieldTypeEnum.timestamp)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
@@ -289,6 +277,18 @@ class OrderItem extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: OrderItem.USERSID,
       isRequired: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: OrderItem.STATUSTIME,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.timestamp)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: OrderItem.SHARDID,
+      isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     

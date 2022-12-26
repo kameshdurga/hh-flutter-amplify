@@ -19,22 +19,23 @@ type Restaurants @model @auth(rules: [{allow: public}]) {
 
 type OrderItem @model @auth(rules: [{allow: public}]) {
   id: ID!
-  OrderID: ID
-  LineItems: AWSJSON
-  UserID: ID
-  SubTotal: Float
-  Tax: Float
-  untitledfield: String
-  ServiceFee: Float
-  Total: Float
+  LineItemId: ID
+  ShopId: ID
+  ItemSKU: String
+  RecipientID: AWSPhone
+  Status: String
+  UpdatedTime: AWSTimestamp
   CreatedAt: AWSTimestamp
   usersID: ID! @index(name: "byUsers")
+  statusTime: AWSTimestamp
+  ShardID: String
 }
 
 type Users @model @auth(rules: [{allow: public}]) {
   id: ID!
-  UserID: ID
+  Email: AWSEmail
   UserStatus: String
   OrderItems: [OrderItem] @hasMany(indexName: "byUsers", fields: ["id"])
-}
- 
+  Phone: AWSPhone
+  NotificationStatus: String
+} 

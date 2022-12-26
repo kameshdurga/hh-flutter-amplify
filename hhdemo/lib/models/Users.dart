@@ -30,9 +30,11 @@ import 'package:flutter/foundation.dart';
 class Users extends Model {
   static const classType = const _UsersModelType();
   final String id;
-  final String? _UserID;
+  final String? _Email;
   final String? _UserStatus;
   final List<OrderItem>? _OrderItems;
+  final String? _Phone;
+  final String? _NotificationStatus;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -44,8 +46,8 @@ class Users extends Model {
     return id;
   }
   
-  String? get UserID {
-    return _UserID;
+  String? get Email {
+    return _Email;
   }
   
   String? get UserStatus {
@@ -56,6 +58,14 @@ class Users extends Model {
     return _OrderItems;
   }
   
+  String? get Phone {
+    return _Phone;
+  }
+  
+  String? get NotificationStatus {
+    return _NotificationStatus;
+  }
+  
   TemporalDateTime? get createdAt {
     return _createdAt;
   }
@@ -64,14 +74,16 @@ class Users extends Model {
     return _updatedAt;
   }
   
-  const Users._internal({required this.id, UserID, UserStatus, OrderItems, createdAt, updatedAt}): _UserID = UserID, _UserStatus = UserStatus, _OrderItems = OrderItems, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Users._internal({required this.id, Email, UserStatus, OrderItems, Phone, NotificationStatus, createdAt, updatedAt}): _Email = Email, _UserStatus = UserStatus, _OrderItems = OrderItems, _Phone = Phone, _NotificationStatus = NotificationStatus, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Users({String? id, String? UserID, String? UserStatus, List<OrderItem>? OrderItems}) {
+  factory Users({String? id, String? Email, String? UserStatus, List<OrderItem>? OrderItems, String? Phone, String? NotificationStatus}) {
     return Users._internal(
       id: id == null ? UUID.getUUID() : id,
-      UserID: UserID,
+      Email: Email,
       UserStatus: UserStatus,
-      OrderItems: OrderItems != null ? List<OrderItem>.unmodifiable(OrderItems) : OrderItems);
+      OrderItems: OrderItems != null ? List<OrderItem>.unmodifiable(OrderItems) : OrderItems,
+      Phone: Phone,
+      NotificationStatus: NotificationStatus);
   }
   
   bool equals(Object other) {
@@ -83,9 +95,11 @@ class Users extends Model {
     if (identical(other, this)) return true;
     return other is Users &&
       id == other.id &&
-      _UserID == other._UserID &&
+      _Email == other._Email &&
       _UserStatus == other._UserStatus &&
-      DeepCollectionEquality().equals(_OrderItems, other._OrderItems);
+      DeepCollectionEquality().equals(_OrderItems, other._OrderItems) &&
+      _Phone == other._Phone &&
+      _NotificationStatus == other._NotificationStatus;
   }
   
   @override
@@ -97,8 +111,10 @@ class Users extends Model {
     
     buffer.write("Users {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("UserID=" + "$_UserID" + ", ");
+    buffer.write("Email=" + "$_Email" + ", ");
     buffer.write("UserStatus=" + "$_UserStatus" + ", ");
+    buffer.write("Phone=" + "$_Phone" + ", ");
+    buffer.write("NotificationStatus=" + "$_NotificationStatus" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -106,17 +122,19 @@ class Users extends Model {
     return buffer.toString();
   }
   
-  Users copyWith({String? id, String? UserID, String? UserStatus, List<OrderItem>? OrderItems}) {
+  Users copyWith({String? id, String? Email, String? UserStatus, List<OrderItem>? OrderItems, String? Phone, String? NotificationStatus}) {
     return Users._internal(
       id: id ?? this.id,
-      UserID: UserID ?? this.UserID,
+      Email: Email ?? this.Email,
       UserStatus: UserStatus ?? this.UserStatus,
-      OrderItems: OrderItems ?? this.OrderItems);
+      OrderItems: OrderItems ?? this.OrderItems,
+      Phone: Phone ?? this.Phone,
+      NotificationStatus: NotificationStatus ?? this.NotificationStatus);
   }
   
   Users.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _UserID = json['UserID'],
+      _Email = json['Email'],
       _UserStatus = json['UserStatus'],
       _OrderItems = json['OrderItems'] is List
         ? (json['OrderItems'] as List)
@@ -124,19 +142,23 @@ class Users extends Model {
           .map((e) => OrderItem.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
           .toList()
         : null,
+      _Phone = json['Phone'],
+      _NotificationStatus = json['NotificationStatus'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'UserID': _UserID, 'UserStatus': _UserStatus, 'OrderItems': _OrderItems?.map((OrderItem? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'Email': _Email, 'UserStatus': _UserStatus, 'OrderItems': _OrderItems?.map((OrderItem? e) => e?.toJson()).toList(), 'Phone': _Phone, 'NotificationStatus': _NotificationStatus, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
   static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField USERID = QueryField(fieldName: "UserID");
+  static final QueryField EMAIL = QueryField(fieldName: "Email");
   static final QueryField USERSTATUS = QueryField(fieldName: "UserStatus");
   static final QueryField ORDERITEMS = QueryField(
     fieldName: "OrderItems",
     fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: (OrderItem).toString()));
+  static final QueryField PHONE = QueryField(fieldName: "Phone");
+  static final QueryField NOTIFICATIONSTATUS = QueryField(fieldName: "NotificationStatus");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Users";
     modelSchemaDefinition.pluralName = "Users";
@@ -155,7 +177,7 @@ class Users extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.USERID,
+      key: Users.EMAIL,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
@@ -171,6 +193,18 @@ class Users extends Model {
       isRequired: false,
       ofModelName: (OrderItem).toString(),
       associatedKey: OrderItem.USERSID
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Users.PHONE,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Users.NOTIFICATIONSTATUS,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(

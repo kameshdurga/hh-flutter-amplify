@@ -27,7 +27,8 @@
           "unauthRoleName": "amplify-hungerheroescopy-staging-191443-unauthRole"
         },
         "HungerHeroesCopy": {},
-        "true": {}
+        "true": {},
+        "userPoolGroups": {}
       }
     }
   }

@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _restaurants =
             restaurants?.whereType<Restaurants>().toList() ?? const [];
+        print("---------------restaurants-------------------------------");
         print(_restaurants);
       });
     } on Exception catch (e) {
@@ -61,18 +62,6 @@ class _HomePageState extends State<HomePage> {
       itemCount: _restaurants.length,
       itemBuilder: (context, index) {
         final _restaurantItem = _restaurants[index];
-        // return ListTile(
-        //   // leading: Padding(
-        //   //   padding: const EdgeInsets.all(2.0),
-        //   //   child: Text('${_restaurantItem.Name}'),
-        //   // ),
-        //   leading: RestaurantImagePage(imageKey: _restaurantItem.imagekey!),
-        //   title: Text('${_restaurantItem.City}'),
-        //   subtitle: Text('${_restaurantItem.Name}'),
-        //   trailing: Row(
-        //     mainAxisSize: MainAxisSize.min,
-        //   ),
-        // );
 
         return GestureDetector(
             onTap: () {

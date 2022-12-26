@@ -50,55 +50,6 @@ class _RestaurantImagePageState extends State<RestaurantImagePage> {
     }
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   // return Scaffold(
-  //   //   body: Text(_imagekey!),
-  //   // );
-
-  //   return ListTile(
-  //     // leading: Padding(
-  //     //   padding: const EdgeInsets.all(2.0),
-  //     //   child: Text('${_restaurantItem.Name}'),
-  //     // ),
-  //     leading: Image.network(_imagekey),
-  //     title: Text(widget.name),
-  //     subtitle: Text(widget.city),
-  //     trailing: Row(
-  //       mainAxisSize: MainAxisSize.min,
-  //     ),
-  //   );
-  // }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: <Widget>[
-  //         Text(
-  //           widget.name,
-  //           style: const TextStyle(
-  //             fontWeight: FontWeight.w500,
-  //             fontSize: 14.0,
-  //           ),
-  //         ),
-  //         const Padding(padding: EdgeInsets.symmetric(vertical: 2.0)),
-  //         Text(
-  //           widget.city,
-  //           style: const TextStyle(fontSize: 10.0),
-  //         ),
-  //         const Padding(padding: EdgeInsets.symmetric(vertical: 1.0)),
-  //         Text(
-  //           ' views',
-  //           style: const TextStyle(fontSize: 10.0),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Padding(

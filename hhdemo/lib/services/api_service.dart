@@ -13,6 +13,7 @@ class APIService {
       List<Restaurants?>? restaurants = response.data?.items;
       print("called actually now");
       print(restaurants?.first?.id);
+      print(restaurants?.length);
       // restaurants?.sort((a, b) => b!.createdAt.compareTo(a!.createdAt));
       return restaurants;
     } on Exception catch (e) {
