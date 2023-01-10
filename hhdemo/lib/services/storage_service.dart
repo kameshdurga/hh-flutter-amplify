@@ -28,7 +28,7 @@ class StorageService {
 
   String key = "";
 
-  Future<GetUrlResult?> getUrl(String? key) async {
+  Future<StorageGetUrlResult?> getUrl(String? key) async {
     try {
       //uploadFile();
       print("calling get url for the key " + key!);
@@ -39,9 +39,10 @@ class StorageService {
       //   key = element.key;
       // });
 
-      S3GetUrlOptions options = S3GetUrlOptions(expires: 10000);
-      GetUrlResult result =
-          await Amplify.Storage.getUrl(key: key, options: options);
+      S3GetUrlOptions options =
+          S3GetUrlOptions(expiresIn: Duration(seconds: 100000));
+      StorageGetUrlResult result =
+          await Amplify.Storage.getUrl(key: key, options: options).result;
       print('GetUrl done: ');
       return result;
     } catch (e) {
@@ -54,7 +55,7 @@ class StorageService {
   listObjectsFromS3() async {
     try {
       print("calling list objects");
-      ListResult s3List = await Amplify.Storage.list();
+      StorageListResult s3List = await Amplify.Storage.list().result;
       s3List.items.forEach((element) {
         print("element key is" + element.key);
       });
@@ -66,9 +67,12 @@ class StorageService {
   uploadFile() async {
     print("upload file continue");
     try {
-      File file = File('/Users/durgakam/Downloads/fc2.jpg');
+      //File file = File('/Users/durgakam/Downloads/fc2.jpg');
       final fileName = DateTime.now().toIso8601String();
-      final result = await Amplify.Storage.uploadFile(local: file, key: "fc2");
+      final result = await Amplify.Storage.uploadFile(
+              localFile: AWSFile.fromPath('/Users/durgakam/Downloads/fc2.jpg'),
+              key: "fc2")
+          .result;
     } catch (e) {
       print("upload file failed");
       print(e);

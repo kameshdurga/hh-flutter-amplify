@@ -49,8 +49,17 @@ class OrderItem extends Model {
     return id;
   }
   
-  String? get LineItemId {
-    return _LineItemId;
+  String get LineItemId {
+    try {
+      return _LineItemId!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   String? get ShopId {
@@ -106,9 +115,9 @@ class OrderItem extends Model {
     return _updatedAt;
   }
   
-  const OrderItem._internal({required this.id, LineItemId, ShopId, ItemSKU, RecipientID, Status, UpdatedTime, CreatedAt, required usersID, statusTime, ShardID, createdAt, updatedAt}): _LineItemId = LineItemId, _ShopId = ShopId, _ItemSKU = ItemSKU, _RecipientID = RecipientID, _Status = Status, _UpdatedTime = UpdatedTime, _CreatedAt = CreatedAt, _usersID = usersID, _statusTime = statusTime, _ShardID = ShardID, _createdAt = createdAt, _updatedAt = updatedAt;
+  const OrderItem._internal({required this.id, required LineItemId, ShopId, ItemSKU, RecipientID, Status, UpdatedTime, CreatedAt, required usersID, statusTime, ShardID, createdAt, updatedAt}): _LineItemId = LineItemId, _ShopId = ShopId, _ItemSKU = ItemSKU, _RecipientID = RecipientID, _Status = Status, _UpdatedTime = UpdatedTime, _CreatedAt = CreatedAt, _usersID = usersID, _statusTime = statusTime, _ShardID = ShardID, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory OrderItem({String? id, String? LineItemId, String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, required String usersID, TemporalTimestamp? statusTime, String? ShardID}) {
+  factory OrderItem({String? id, required String LineItemId, String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, required String usersID, TemporalTimestamp? statusTime, String? ShardID}) {
     return OrderItem._internal(
       id: id == null ? UUID.getUUID() : id,
       LineItemId: LineItemId,
@@ -234,7 +243,7 @@ class OrderItem extends Model {
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: OrderItem.LINEITEMID,
-      isRequired: false,
+      isRequired: true,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     

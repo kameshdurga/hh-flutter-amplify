@@ -39,7 +39,7 @@ class _RestaurantImagePageState extends State<RestaurantImagePage> {
       final imageUrl = await _storageService.getUrl(widget.imageKey);
 
       setState(() {
-        _imagekey = imageUrl?.url ?? "";
+        _imagekey = imageUrl?.url.toString() ?? "";
         print("got imagekey " + _imagekey);
       });
     } on Exception catch (e) {

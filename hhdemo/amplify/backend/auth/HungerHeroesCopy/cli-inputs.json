@@ -1,8 +1,8 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": true,
+    "identityPoolName": "hungerheroescopya2c0386a_identitypool_a2c0386a",
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "hunger62558d48",
     "userPoolName": "HungerHeroesCopy",
     "autoVerifiedAttributes": [
@@ -22,7 +22,7 @@
     "requiredAttributes": [],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientRefreshTokenValidity": "700",
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
     "userpoolClientLambdaRole": "Hunger62558d48_userpoolclient_lambda_role",
@@ -34,8 +34,8 @@
     "usernameAttributes": [
       "email"
     ],
-    "useDefault": "default",
-    "userPoolGroups": false,
+    "useDefault": "manual",
+    "userPoolGroups": true,
     "userPoolGroupList": [
       "testpool"
     ],
@@ -57,6 +57,12 @@
     "breakCircularDependency": true,
     "dependsOn": [],
     "hostedUI": false,
-    "authProviders": []
+    "triggers": {},
+    "authProviders": [],
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "permissions": [],
+    "thirdPartyAuth": false
   }
-} 
+}

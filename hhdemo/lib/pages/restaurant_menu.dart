@@ -55,6 +55,7 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
     print("menu from widget is " + widget.menu);
 
     var cart = context.watch<Cart>();
+    cart.setRestaurant(widget.name);
 
     final parsedJson = jsonDecode(widget.menu);
 

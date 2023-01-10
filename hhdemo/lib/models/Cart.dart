@@ -7,7 +7,11 @@ import 'Menu.dart';
 class Cart with ChangeNotifier {
   List<Menu> products = [];
 
+  String restaurant = "";
+
   HashMap<String, int> hashMap = HashMap<String, int>();
+
+  String userEmail = "";
 
   double get total {
     return products.fold(0.0, (double currentTotal, Menu nextProduct) {
@@ -15,6 +19,14 @@ class Cart with ChangeNotifier {
           (double.parse(nextProduct.price) *
               hashMap[nextProduct.item]!.toDouble());
     });
+  }
+
+  void setRestaurant(String shop) {
+    restaurant = shop;
+  }
+
+  void setUserEmail(String email) {
+    userEmail = email;
   }
 
   void addToCart(Menu product) {

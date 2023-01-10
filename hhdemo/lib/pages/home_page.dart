@@ -1,6 +1,13 @@
+import 'dart:convert';
+
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:hhdemo/models/LoggedUser.dart';
 import 'package:hhdemo/pages/restaurant_image.dart';
 import 'package:hhdemo/pages/restaurant_menu.dart';
+import 'package:provider/provider.dart';
+import '../models/Cart.dart';
 import '../models/ModelProvider.dart';
 
 import '../services/api_service.dart';
@@ -21,11 +28,15 @@ class _HomePageState extends State<HomePage> {
   final APIService _apiService = APIService();
 
   List<Restaurants> _restaurants = const [];
+  LoggedUser user = LoggedUser();
 
   @override
   void initState() {
     super.initState();
     _getRestaurants();
+    _getLoggedInUser();
+
+    //_createDonor();
   }
 
   Future<void> _getRestaurants() async {
@@ -48,6 +59,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var cart = context.watch<Cart>();
+    cart.setUserEmail(user.email);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -86,5 +100,35 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
+  }
+
+  // void _createDonor() async {
+  //   try {
+  //     final response = await _apiService.saveUser(user);
+
+  //     setState(() {
+  //       print("---------------Saved user-------------------------------");
+  //       print(user);
+  //     });
+  //   } on Exception catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       backgroundColor: Colors.red,
+  //       content: Text(e.toString()),
+  //     ));
+  //   }
+  // }
+
+  void _getLoggedInUser() async {
+    try {
+      final awsUser = await Amplify.Auth.getCurrentUser();
+      final userJson = awsUser.signInDetails.toJson();
+      user.setEmail(userJson["username"].toString());
+      final response = _apiService.saveUser(user);
+    } on Exception catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(e.toString()),
+      ));
+    }
   }
 }

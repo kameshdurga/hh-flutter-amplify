@@ -3,15 +3,16 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:hhdemo/models/LoggedUser.dart';
 import 'package:provider/provider.dart';
 
 import '../models/Cart.dart';
 import 'package:pay/pay.dart';
 
+import '../services/api_service.dart';
+
 class MyCart extends StatelessWidget {
   const MyCart({Key? key}) : super(key: key);
-
-  // ignore: use_key_in_widget_constructors
 
   @override
   Widget build(BuildContext context) {
@@ -75,19 +76,25 @@ class _CartList extends StatelessWidget {
   }
 }
 
-const _paymentItems = [
-  PaymentItem(
-    label: 'Total',
-    amount: '99.99',
-    status: PaymentItemStatus.final_price,
-  )
-];
-
 class _CartTotal extends StatelessWidget {
+  final APIService _apiService = APIService();
+
   @override
   Widget build(BuildContext context) {
     var hugeStyle =
         Theme.of(context).textTheme.displayLarge!.copyWith(fontSize: 48);
+
+    var cart = context.watch<Cart>();
+
+    var total = cart.total.toString();
+
+    var _paymentItems = [
+      PaymentItem(
+        label: 'Total',
+        amount: total,
+        status: PaymentItemStatus.final_price,
+      )
+    ];
 
     return SizedBox(
       height: 200,
@@ -104,6 +111,7 @@ class _CartTotal extends StatelessWidget {
             Consumer<Cart>(
                 builder: (context, cart, child) =>
                     Text('\$${cart.total}', style: hugeStyle)),
+
             const SizedBox(width: 24),
             // TextButton(
             //   onPressed: () async {
@@ -115,6 +123,7 @@ class _CartTotal extends StatelessWidget {
             //   style: TextButton.styleFrom(),
             //   child: const Text('Donate'),
             // ),
+
             ApplePayButton(
               paymentConfigurationAsset: '/applepay.json',
               paymentItems: _paymentItems,
@@ -124,7 +133,9 @@ class _CartTotal extends StatelessWidget {
               height: 50,
               margin: const EdgeInsets.only(top: 15.0),
               onPaymentResult: (value) {
-                print(value);
+                print("--------payment done----------------------");
+                print(cart.total);
+                _apiService.saveCart(cart, cart.userEmail);
               },
               onError: (error) {
                 print(error);
@@ -138,39 +149,4 @@ class _CartTotal extends StatelessWidget {
       ),
     );
   }
-
-  // Future<void> initPaymentSheet() async {
-  //   try {
-  //     // 1. create payment intent on the server
-  //     final data = await createTestPaymentSheet();
-
-  //     // 2. initialize the payment sheet
-  //     await Stripe.instance.initPaymentSheet(
-  //       paymentSheetParameters: SetupPaymentSheetParameters(
-  //         // Enable custom flow
-  //         customFlow: true,
-  //         // Main params
-  //         merchantDisplayName: 'Flutter Stripe Store Demo',
-  //         paymentIntentClientSecret: data['paymentIntent'],
-  //         // Customer keys
-  //         customerEphemeralKeySecret: data['ephemeralKey'],
-  //         customerId: data['customer'],
-  //         // Extra options
-  //         applePay: PaymentSheetApplePay(
-  //           merchantCountryCode: 'US',
-  //         ),
-  //         googlePay: PaymentSheetGooglePay(merchantCountryCode: 'DE'),
-  //         style: ThemeMode.dark,
-  //       ),
-  //     );
-  //     setState(() {
-  //       step = 1;
-  //     });
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('Error: $e')),
-  //     );
-  //     rethrow;
-  //   }
-  // }
 }
