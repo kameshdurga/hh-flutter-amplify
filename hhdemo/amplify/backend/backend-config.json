@@ -27,18 +27,18 @@
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
         ],
         "verificationMechanisms": [
           "EMAIL"
@@ -50,14 +50,14 @@
     "userPoolGroups": {
       "dependsOn": [
         {
-          "category": "auth",
-          "resourceName": "HungerHeroesCopy",
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb",
             "AppClientID",
             "IdentityPoolId"
-          ]
+          ],
+          "category": "auth",
+          "resourceName": "HungerHeroesCopy"
         }
       ],
       "providerPlugin": "awscloudformation",

@@ -3,6 +3,8 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
 import 'package:hhdemo/models/LoggedUser.dart';
+import 'package:hhdemo/models/Menu.dart';
+import 'package:hhdemo/models/MenuItems.dart';
 import 'package:hhdemo/pages/cart_page.dart';
 import 'package:hhdemo/pages/home_page.dart';
 import 'package:provider/provider.dart';
@@ -84,22 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-  }
-
-  Future<void> _getRestaurants() async {
-    try {
-      final restaurants = await _apiService.getRestaurants();
-      setState(() {
-        _restaurants =
-            restaurants?.whereType<Restaurants>().toList() ?? const [];
-        print(_restaurants);
-      });
-    } on Exception catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Colors.red,
-        content: Text(e.toString()),
-      ));
-    }
   }
 
   void _incrementCounter() {

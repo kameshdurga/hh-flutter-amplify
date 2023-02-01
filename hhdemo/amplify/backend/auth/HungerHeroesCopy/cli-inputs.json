@@ -35,10 +35,8 @@
       "email"
     ],
     "useDefault": "manual",
-    "userPoolGroups": true,
-    "userPoolGroupList": [
-      "testpool"
-    ],
+    "userPoolGroups": false,
+    "userPoolGroupList": [],
     "adminQueries": false,
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
@@ -65,4 +63,4 @@
     "permissions": [],
     "thirdPartyAuth": false
   }
-}
+} 

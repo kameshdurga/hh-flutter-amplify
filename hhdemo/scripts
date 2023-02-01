@@ -1,0 +1,127 @@
+{\"items\": [{\"item\": \"Chicken Sandwich\",\"price\": \"6.5\",\"imageKey\": \"chicken.png\"},{\"item\": \"Cheese Burger\",\"price\": \"5.5\",\"imageKey\": \"cheeseburger.png\"}]}
+
+mutation MyMutation {
+	updateRestaurants(input: {id:"0316cc82-3d2a-4e1a-9d8c-ec9f0eaf7c21",
+	Name:"Mc Donalds",imagekey:"mcdonaldslogo.png",
+	Menu:"{\"items\": [{\"item\": \"Chicken Sandwich\",\"price\": \"6.5\",\"imageKey\": \"chicken.png\"},{\"item\": \"Cheese Burger\",\"price\": \"5.5\",\"imageKey\": \"cheeseburger.png\"}]}"}) {
+	  id
+	}
+  }
+  
+
+  from aws_lambda_powertools import Logger, Tracer
+from aws_lambda_powertools.logging import utils
+from aws_lambda_powertools.utilities.typing import LambdaContext
+import emoji
+import os
+import boto3
+from botocore.exceptions import ClientError
+from boto3.dynamodb.conditions import Key
+
+tracer = Tracer()
+logger = Logger()
+utils.copy_config_to_registered_loggers(source_logger=logger)
+
+table = boto3.resource('dynamodb').Table("OrderItem-tzhp5rhe6fbqpjj2ojce34dkdu-staging")
+
+user_table = boto3.resource('dynamodb').Table("Users-tzhp5rhe6fbqpjj2ojce34dkdu-staging")
+
+def compare(item1):
+        print("item1 is")
+        if item1["NotificationStatus"] == 'New':
+            return 1
+        elif item1["NotificationStatus"] == 'Claimed':
+            return 2
+        else: return 0
+
+
+def test_data():
+    #table_name = os.environ["table_name"]
+    resp = table.query(
+    # Add the name of the index you want to use in your query.
+    IndexName="Status-index",
+    KeyConditionExpression=Key('Status').eq('New'))
+    
+    
+    users = user_table.query(
+    # Add the name of the index you want to use in your query.
+    IndexName="UserStatus-index",
+    KeyConditionExpression=Key('UserStatus').eq('Available'))
+
+    print("printing by index")
+    users['Items'].sort(key = compare)
+    counter =0
+    for item in resp['Items']:
+        print(item)
+        print("getting user info")
+        print(users['Items'][counter])
+        userLocal = users['Items'][counter]
+        counter +=1
+        sns_resource = boto3.resource('sns',region_name='us-east-1')
+        message = f"Donation from Hunger Heroes, you can pickup {item['ItemSKU']} from {item['ShopId']}"
+        print(message)
+        response = sns_resource.meta.client.publish(
+                PhoneNumber="+"+userLocal["Phone"], Message=message)
+        print("text sent successfully")
+        print(response)
+        print("response received succesfully")
+        
+        update_order_item(item,userLocal["Phone"])
+        #update_user_status(userLocal)
+
+
+def update_order_item(item, reciepient):
+    try:
+            print("updating {item['id']}, LineItemId': item['LineItemId']")
+            response = table.update_item(
+                Key={'id': item['id'], 'LineItemId': item['LineItemId']},
+                UpdateExpression="set #s=:st,RecipientID=:r",
+                ExpressionAttributeValues={
+                    ':st': "Notified",':r': reciepient},
+                ExpressionAttributeNames = {"#s":"Status"},
+                ReturnValues="UPDATED_NEW")
+    except ClientError as err:
+        logger.error(
+            "Couldn't update order Here's why: %s: %s",
+            err.response['Error']['Code'], err.response['Error']['Message'])
+        raise
+    else:
+        return response['Attributes']
+
+
+
+
+def create_data(message, subject):
+    table_name = os.environ["table_name"]
+    table = boto3.resource('dynamodb').Table(table_name)
+    # client.publish(
+    #     TopicArn=topic_arn, Message=message, Subject=subject)
+    logger.info("-adding data into database")
+    try:
+        table.put_item(
+                Item={
+                    'OrderID': message["orderID1"],
+                    'CustomerID': 123,
+                    'product': "Harry potter book",
+                    'quantity': 2,
+                    'status': "NEW"})
+        table.put_item(
+                Item={
+                    'OrderID': message["orderID2"],
+                    'CustomerID': 123,
+                    'product': "shoe",
+                    'quantity': 1,
+                    'status': "NEW"})
+    except ClientError as err:
+        logger.error("couldnt update the table")
+        raise
+
+
+@tracer.capture_lambda_handler
+def handler(event: dict, context: LambdaContext) -> dict:
+    logger.info(emoji.emojize("Python is :thumbs_up:"))
+    message = "Hello from lambda!"
+    subject = "From  Lambda"
+    create_data(event, subject)
+    test_data()
+    return {"statusCode": 200, "body": "Hello, world!"}

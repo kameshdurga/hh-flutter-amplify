@@ -20,12 +20,14 @@ type Restaurants @model @auth(rules: [{allow: public}]) {
 type Users @model @auth(rules: [{allow: public}]) {
   id: ID!
   Email: AWSEmail
-  UserStatus: String
+  UserStatus: String @index(name: "UserStatus-index")
   Phone: AWSPhone
   NotificationStatus: String
 }
 
-type OrderItem @model @auth(rules: [{allow: public}]) {
+
+
+ type OrderItem @model @auth(rules: [{allow: public}]) {
   id: ID! @primaryKey
     (sortKeyFields: ["LineItemId"])
   LineItemId: ID!
@@ -38,6 +40,4 @@ type OrderItem @model @auth(rules: [{allow: public}]) {
   usersID: ID! @index(name: "byUsers")
   statusTime: AWSTimestamp
   ShardID: String
-}
-
- 
+  }

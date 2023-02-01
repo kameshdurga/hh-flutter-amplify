@@ -1,15 +1,15 @@
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:hhdemo/models/LoggedUser.dart';
+import 'package:hhdemo/models/MenuItems.dart';
 
 import '../models/Cart.dart';
+import '../models/Menu.dart';
 import '../models/ModelProvider.dart';
 
 class APIService {
   Future<List<Restaurants?>?> getRestaurants() async {
     try {
-      print("calling actually now");
-
       final request = ModelQueries.list(Restaurants.classType);
       final response = await Amplify.API.query(request: request).response;
       List<Restaurants?>? restaurants = response.data?.items;
@@ -64,6 +64,7 @@ class APIService {
       return createdOrderItem.id;
     } on Exception catch (e) {
       //_showError(e);
+      print('errors: ' + e.toString());
     }
     return "";
   }
@@ -112,6 +113,7 @@ class APIService {
       print('Mutation result: ' + userResponse.id);
       return userResponse.id;
     } on Exception catch (e) {
+      print("user already exist");
       //_showError(e);
     }
     return "";

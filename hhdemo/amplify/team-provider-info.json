@@ -1,33 +1,19 @@
 {
-  "staging": {
+  "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-hungerheroescopy-staging-191443-authRole",
-      "UnauthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-staging-191443-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-staging-191443-authRole",
+      "AuthRoleName": "amplify-hungerheroescopy-dev-115856-authRole",
+      "UnauthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-dev-115856-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-dev-115856-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-hungerheroescopy-staging-191443-deployment",
-      "UnauthRoleName": "amplify-hungerheroescopy-staging-191443-unauthRole",
-      "StackName": "amplify-hungerheroescopy-staging-191443",
-      "StackId": "arn:aws:cloudformation:us-east-2:754404958569:stack/amplify-hungerheroescopy-staging-191443/b75af220-0604-11ed-945a-06f66f7863be",
-      "AmplifyAppId": "d3sdlct8kz6qc0"
+      "DeploymentBucketName": "amplify-hungerheroescopy-dev-115856-deployment",
+      "UnauthRoleName": "amplify-hungerheroescopy-dev-115856-unauthRole",
+      "StackName": "amplify-hungerheroescopy-dev-115856",
+      "StackId": "arn:aws:cloudformation:us-east-2:754404958569:stack/amplify-hungerheroescopy-dev-115856/9d9a1010-9690-11ed-b2ee-02ed45a39e88",
+      "AmplifyAppId": "d15c56y49hlsbn"
     },
     "categories": {
       "auth": {
-        "hungerheroescopyabd24781": {
-          "userPoolId": "us-east-2_a0YP3AOuA",
-          "userPoolName": "HungerHeroesCopy-staging",
-          "webClientId": "4r31g5gri8dbc2srjed7d0ue2p",
-          "nativeClientId": "4r31g5gri8dbc2srjed7d0ue2p",
-          "identityPoolId": "us-east-2:4ee2901d-df41-4eb0-8529-eecc1dc6a9ab",
-          "identityPoolName": "testAuthIdentityPool__staging",
-          "allowUnauthenticatedIdentities": true,
-          "authRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-staging-191443-authRole",
-          "authRoleName": "amplify-hungerheroescopy-staging-191443-authRole",
-          "unauthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-staging-191443-unauthRole",
-          "unauthRoleName": "amplify-hungerheroescopy-staging-191443-unauthRole"
-        },
         "HungerHeroesCopy": {},
-        "true": {},
         "userPoolGroups": {}
       }
     }
