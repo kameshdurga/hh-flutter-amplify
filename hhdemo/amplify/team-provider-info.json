@@ -15,6 +15,12 @@
       "auth": {
         "HungerHeroesCopy": {},
         "userPoolGroups": {}
+      },
+      "api": {
+        "HungerHeroesCopy": {}
+      },
+      "storage": {
+        "s31b1d5ab3": {}
       }
     }
   }

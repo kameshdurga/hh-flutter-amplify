@@ -8,14 +8,18 @@ import '../models/Cart.dart';
 import '../models/Menu.dart';
 
 class RestaurantMenuPage extends StatefulWidget {
-  const RestaurantMenuPage({
-    Key? key,
-    required this.name,
-    required this.menu,
-  }) : super(key: key);
+  const RestaurantMenuPage(
+      {Key? key,
+      required this.name,
+      required this.menu,
+      required this.zipCode,
+      required this.id})
+      : super(key: key);
 
   final String name;
   final String menu;
+  final String zipCode;
+  final String id;
 
   @override
   State<RestaurantMenuPage> createState() => _RestaurantMenuPageState();
@@ -55,7 +59,12 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
     print("menu from widget is " + widget.menu);
 
     var cart = context.watch<Cart>();
-    cart.setRestaurant(widget.name);
+    cart.setRestaurant(widget.id);
+    cart.setZipCode(widget.zipCode);
+
+    print("products lengthis ");
+
+    print(cart.products.length.toString());
 
     final parsedJson = jsonDecode(widget.menu);
 
@@ -79,7 +88,7 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: [
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
               color: Colors.grey,
@@ -96,12 +105,12 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
               onPressed: () => Navigator.of(context).pushNamed('/cart'),
             ),
             label: 'Cart',
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.shopping_cart,
               color: Colors.red,
             ),
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
               color: Colors.yellow,
@@ -161,7 +170,7 @@ class _RestaurantMenuPageState extends State<RestaurantMenuPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       //add some actions, icons...etc
-                      CircleAvatar(
+                      const CircleAvatar(
                           backgroundImage: NetworkImage(
                               "https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")),
                     ],

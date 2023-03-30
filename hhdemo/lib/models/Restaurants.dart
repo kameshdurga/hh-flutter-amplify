@@ -244,6 +244,10 @@ class Restaurants extends Model {
   Map<String, dynamic> toJson() => {
     'id': id, 'Name': _Name, 'Address': _Address, 'Address2': _Address2, 'City': _City, 'State': _State, 'Zipcode': _Zipcode, 'Contact1': _Contact1, 'Contact2': _Contact2, 'Phone1': _Phone1, 'Phone2': _Phone2, 'Email': _Email, 'RestaurantID': _RestaurantID, 'Web': _Web, 'Menu': _Menu, 'imagekey': _imagekey, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
+  
+  Map<String, Object?> toMap() => {
+    'id': id, 'Name': _Name, 'Address': _Address, 'Address2': _Address2, 'City': _City, 'State': _State, 'Zipcode': _Zipcode, 'Contact1': _Contact1, 'Contact2': _Contact2, 'Phone1': _Phone1, 'Phone2': _Phone2, 'Email': _Email, 'RestaurantID': _RestaurantID, 'Web': _Web, 'Menu': _Menu, 'imagekey': _imagekey, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+  };
 
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField NAME = QueryField(fieldName: "Name");
@@ -390,5 +394,10 @@ class _RestaurantsModelType extends ModelType<Restaurants> {
   @override
   Restaurants fromJson(Map<String, dynamic> jsonData) {
     return Restaurants.fromJson(jsonData);
+  }
+  
+  @override
+  String modelName() {
+    return 'Restaurants';
   }
 }

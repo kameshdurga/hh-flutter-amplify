@@ -7,6 +7,7 @@ import 'package:hhdemo/models/Menu.dart';
 import 'package:hhdemo/models/MenuItems.dart';
 import 'package:hhdemo/pages/cart_page.dart';
 import 'package:hhdemo/pages/home_page.dart';
+import 'package:hhdemo/pages/test_list_json_page.dart';
 import 'package:provider/provider.dart';
 import '../services/api_service.dart';
 import 'amplifyconfiguration.dart';
@@ -37,7 +38,6 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<Cart>(create: (_) => Cart()),
-        ChangeNotifierProvider<LoggedUser>(create: (_) => LoggedUser())
       ],
       child: const MyApp(),
     ),
@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/cart': (context) => const MyCart(),
           "/": (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
+          // "/": (context) => MyHomePageTemp(),
         },
       ),
     );

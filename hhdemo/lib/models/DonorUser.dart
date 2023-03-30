@@ -23,17 +23,15 @@ import 'package:amplify_core/amplify_core.dart';
 import 'package:flutter/foundation.dart';
 
 
-/** This is an auto generated class representing the Users type in your schema. */
+/** This is an auto generated class representing the DonorUser type in your schema. */
 @immutable
-class Users extends Model {
-  static const classType = const _UsersModelType();
+class DonorUser extends Model {
+  static const classType = const _DonorUserModelType();
   final String id;
   final String? _Email;
   final String? _UserStatus;
   final String? _Phone;
-  final String? _NotificationStatus;
-  final String? _zipcode;
-  final TemporalDateTime? _timestamp;
+  final String? _RestaurantsID;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -57,25 +55,8 @@ class Users extends Model {
     return _Phone;
   }
   
-  String? get NotificationStatus {
-    return _NotificationStatus;
-  }
-  
-  String get zipcode {
-    try {
-      return _zipcode!;
-    } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
-  }
-  
-  TemporalDateTime? get timestamp {
-    return _timestamp;
+  String? get RestaurantsID {
+    return _RestaurantsID;
   }
   
   TemporalDateTime? get createdAt {
@@ -86,17 +67,15 @@ class Users extends Model {
     return _updatedAt;
   }
   
-  const Users._internal({required this.id, Email, UserStatus, Phone, NotificationStatus, required zipcode, timestamp, createdAt, updatedAt}): _Email = Email, _UserStatus = UserStatus, _Phone = Phone, _NotificationStatus = NotificationStatus, _zipcode = zipcode, _timestamp = timestamp, _createdAt = createdAt, _updatedAt = updatedAt;
+  const DonorUser._internal({required this.id, Email, UserStatus, Phone, RestaurantsID, createdAt, updatedAt}): _Email = Email, _UserStatus = UserStatus, _Phone = Phone, _RestaurantsID = RestaurantsID, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Users({String? id, String? Email, String? UserStatus, String? Phone, String? NotificationStatus, required String zipcode, TemporalDateTime? timestamp}) {
-    return Users._internal(
+  factory DonorUser({String? id, String? Email, String? UserStatus, String? Phone, String? RestaurantsID}) {
+    return DonorUser._internal(
       id: id == null ? UUID.getUUID() : id,
       Email: Email,
       UserStatus: UserStatus,
       Phone: Phone,
-      NotificationStatus: NotificationStatus,
-      zipcode: zipcode,
-      timestamp: timestamp);
+      RestaurantsID: RestaurantsID);
   }
   
   bool equals(Object other) {
@@ -106,14 +85,12 @@ class Users extends Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Users &&
+    return other is DonorUser &&
       id == other.id &&
       _Email == other._Email &&
       _UserStatus == other._UserStatus &&
       _Phone == other._Phone &&
-      _NotificationStatus == other._NotificationStatus &&
-      _zipcode == other._zipcode &&
-      _timestamp == other._timestamp;
+      _RestaurantsID == other._RestaurantsID;
   }
   
   @override
@@ -123,14 +100,12 @@ class Users extends Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("Users {");
+    buffer.write("DonorUser {");
     buffer.write("id=" + "$id" + ", ");
     buffer.write("Email=" + "$_Email" + ", ");
     buffer.write("UserStatus=" + "$_UserStatus" + ", ");
     buffer.write("Phone=" + "$_Phone" + ", ");
-    buffer.write("NotificationStatus=" + "$_NotificationStatus" + ", ");
-    buffer.write("zipcode=" + "$_zipcode" + ", ");
-    buffer.write("timestamp=" + (_timestamp != null ? _timestamp!.format() : "null") + ", ");
+    buffer.write("RestaurantsID=" + "$_RestaurantsID" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -138,46 +113,40 @@ class Users extends Model {
     return buffer.toString();
   }
   
-  Users copyWith({String? id, String? Email, String? UserStatus, String? Phone, String? NotificationStatus, String? zipcode, TemporalDateTime? timestamp}) {
-    return Users._internal(
+  DonorUser copyWith({String? id, String? Email, String? UserStatus, String? Phone, String? RestaurantsID}) {
+    return DonorUser._internal(
       id: id ?? this.id,
       Email: Email ?? this.Email,
       UserStatus: UserStatus ?? this.UserStatus,
       Phone: Phone ?? this.Phone,
-      NotificationStatus: NotificationStatus ?? this.NotificationStatus,
-      zipcode: zipcode ?? this.zipcode,
-      timestamp: timestamp ?? this.timestamp);
+      RestaurantsID: RestaurantsID ?? this.RestaurantsID);
   }
   
-  Users.fromJson(Map<String, dynamic> json)  
+  DonorUser.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _Email = json['Email'],
       _UserStatus = json['UserStatus'],
       _Phone = json['Phone'],
-      _NotificationStatus = json['NotificationStatus'],
-      _zipcode = json['zipcode'],
-      _timestamp = json['timestamp'] != null ? TemporalDateTime.fromString(json['timestamp']) : null,
+      _RestaurantsID = json['RestaurantsID'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'Email': _Email, 'UserStatus': _UserStatus, 'Phone': _Phone, 'NotificationStatus': _NotificationStatus, 'zipcode': _zipcode, 'timestamp': _timestamp?.format(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'Email': _Email, 'UserStatus': _UserStatus, 'Phone': _Phone, 'RestaurantsID': _RestaurantsID, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'Email': _Email, 'UserStatus': _UserStatus, 'Phone': _Phone, 'NotificationStatus': _NotificationStatus, 'zipcode': _zipcode, 'timestamp': _timestamp, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id, 'Email': _Email, 'UserStatus': _UserStatus, 'Phone': _Phone, 'RestaurantsID': _RestaurantsID, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField EMAIL = QueryField(fieldName: "Email");
   static final QueryField USERSTATUS = QueryField(fieldName: "UserStatus");
   static final QueryField PHONE = QueryField(fieldName: "Phone");
-  static final QueryField NOTIFICATIONSTATUS = QueryField(fieldName: "NotificationStatus");
-  static final QueryField ZIPCODE = QueryField(fieldName: "zipcode");
-  static final QueryField TIMESTAMP = QueryField(fieldName: "timestamp");
+  static final QueryField RESTAURANTSID = QueryField(fieldName: "RestaurantsID");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "Users";
-    modelSchemaDefinition.pluralName = "Users";
+    modelSchemaDefinition.name = "DonorUser";
+    modelSchemaDefinition.pluralName = "DonorUsers";
     
     modelSchemaDefinition.authRules = [
       AuthRule(
@@ -191,47 +160,34 @@ class Users extends Model {
     ];
     
     modelSchemaDefinition.indexes = [
-      ModelIndex(fields: const ["UserStatus"], name: "UserStatus-index"),
-      ModelIndex(fields: const ["Phone"], name: "byPhone"),
-      ModelIndex(fields: const ["zipcode", "timestamp"], name: "ZipCodeIndex")
+      ModelIndex(fields: const ["Email"], name: "byEmail"),
+      ModelIndex(fields: const ["RestaurantsID"], name: "byRestaurant")
     ];
     
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.EMAIL,
+      key: DonorUser.EMAIL,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.USERSTATUS,
+      key: DonorUser.USERSTATUS,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.PHONE,
+      key: DonorUser.PHONE,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.NOTIFICATIONSTATUS,
+      key: DonorUser.RESTAURANTSID,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.ZIPCODE,
-      isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.TIMESTAMP,
-      isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
@@ -250,16 +206,16 @@ class Users extends Model {
   });
 }
 
-class _UsersModelType extends ModelType<Users> {
-  const _UsersModelType();
+class _DonorUserModelType extends ModelType<DonorUser> {
+  const _DonorUserModelType();
   
   @override
-  Users fromJson(Map<String, dynamic> jsonData) {
-    return Users.fromJson(jsonData);
+  DonorUser fromJson(Map<String, dynamic> jsonData) {
+    return DonorUser.fromJson(jsonData);
   }
   
   @override
   String modelName() {
-    return 'Users';
+    return 'DonorUser';
   }
 }

@@ -43,6 +43,15 @@ class _HomePageState extends State<HomePage> {
     try {
       final restaurants = await _apiService.getRestaurants();
 
+      _apiService
+          .getRestaurantById("0316cc82-3d2a-4e1a-9d8c-ec9f0eaf7c21")
+          .then(
+        (value) {
+          print("get restaurant by id is");
+          print(value!.Name);
+        },
+      );
+
       setState(() {
         _restaurants =
             restaurants?.whereType<Restaurants>().toList() ?? const [];
@@ -59,9 +68,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var cart = context.watch<Cart>();
-    cart.setUserEmail(user.email);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -71,6 +77,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget Restaurantwidget() {
+    var cart = context.watch<Cart>();
+
     return ListView.separated(
       padding: const EdgeInsets.all(10),
       itemCount: _restaurants.length,
@@ -81,12 +89,21 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               print("Container clicked" + _restaurantItem.Name!);
 
+              print("cart restaurantis " + cart.restaurant);
+              print("_restaurantItem.id is " + _restaurantItem.id);
+
+              if (cart.restaurant != _restaurantItem.id) {
+                cart.removeAll();
+              }
+
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (_) => RestaurantMenuPage(
+                          id: _restaurantItem.id,
                           name: _restaurantItem.Name!,
-                          menu: _restaurantItem.Menu!)));
+                          menu: _restaurantItem.Menu!,
+                          zipCode: _restaurantItem.Zipcode.toString())));
             },
             child: RestaurantImagePage(
                 imageKey: _restaurantItem.imagekey!,
@@ -122,8 +139,7 @@ class _HomePageState extends State<HomePage> {
     try {
       final awsUser = await Amplify.Auth.getCurrentUser();
       final userJson = awsUser.signInDetails.toJson();
-      user.setEmail(userJson["username"].toString());
-      final response = _apiService.saveUser(user);
+      var saveduser = _apiService.saveUser(userJson["username"].toString());
     } on Exception catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.red,

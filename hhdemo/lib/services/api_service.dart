@@ -8,10 +8,29 @@ import '../models/Menu.dart';
 import '../models/ModelProvider.dart';
 
 class APIService {
+  Future<Restaurants?> getRestaurantById(String id) async {
+    try {
+      print("calling actually now");
+
+      final request = ModelQueries.get(Restaurants.classType, id);
+      final response = await Amplify.API.query(request: request).response;
+      Restaurants? restaurants = response.data;
+      // restaurants?.sort((a, b) => b!.createdAt.compareTo(a!.createdAt));
+
+      return restaurants;
+    } on Exception catch (e) {
+      //_showError(e);
+      print("failed actually now" + e.toString());
+    }
+    return null;
+  }
+
   Future<List<Restaurants?>?> getRestaurants() async {
     try {
       final request = ModelQueries.list(Restaurants.classType);
       final response = await Amplify.API.query(request: request).response;
+
+      print(response.errors);
       List<Restaurants?>? restaurants = response.data?.items;
       print("called actually now");
       print(restaurants?.first?.id);
@@ -71,11 +90,14 @@ class APIService {
 
   Future<void> saveCart(Cart cart, String email) async {
     try {
+      print("cart.restaurant is ");
+      print(cart.restaurant);
       OrderItem orderMainItem = OrderItem(
-          usersID: email,
-          ShopId: cart.restaurant,
+          DonorUserID: loggedUser.donoruser!.id,
+          RestaurantsID: cart.restaurant,
           Status: "Created",
-          LineItemId: "0");
+          LineItemId: "0",
+          zipcode: cart.zipCode);
       Future<String> orderIdFuture = saveOrderItem(orderMainItem);
 
       int counter = 1;
@@ -84,11 +106,13 @@ class APIService {
         for (var item in cart.products) {
           OrderItem orderItem = OrderItem(
               id: orderID,
-              usersID: email,
-              ShopId: cart.restaurant,
+              DonorUserID: loggedUser.donoruser!.id,
+              RestaurantsID: cart.restaurant,
               Status: "New",
               LineItemId: counter.toString(),
-              ItemSKU: item.item);
+              ItemSKU: item.item,
+              zipcode: cart.zipCode,
+              imageKey: item.imageKey);
 
           saveOrderItem(orderItem);
           counter = counter + 1;
@@ -99,23 +123,38 @@ class APIService {
     }
   }
 
-  Future<String> saveUser(LoggedUser loggedUser) async {
+  Future<DonorUser?> saveUser(String email) async {
     try {
-      Users user = Users(Email: loggedUser.email, UserStatus: "Donor");
+      final queryPredicate = DonorUser.EMAIL.eq(email);
+
+      final userRequest = ModelQueries.list<DonorUser>(DonorUser.classType,
+          where: queryPredicate);
+      final userScanResponse =
+          await Amplify.API.query(request: userRequest).response;
+      List<DonorUser?>? users = await userScanResponse.data?.items;
+
+      if (users != null && users.isNotEmpty) {
+        print("user already exist");
+        print(users.first!.Email);
+        loggedUser.donoruser = users.first!;
+        return users.first!;
+      }
+
+      DonorUser user = DonorUser(Email: email, UserStatus: "Donor");
       final request = ModelMutations.create(user);
       final response = await Amplify.API.mutate(request: request).response;
 
-      Users? userResponse = response.data;
+      DonorUser? userResponse = response.data;
       if (userResponse == null) {
         print('errors: ' + response.errors.toString());
-        return "error";
+        return null;
       }
       print('Mutation result: ' + userResponse.id);
-      return userResponse.id;
+      loggedUser.donoruser = userResponse;
+      return userResponse;
     } on Exception catch (e) {
-      print("user already exist");
       //_showError(e);
     }
-    return "";
+    return null;
   }
 }

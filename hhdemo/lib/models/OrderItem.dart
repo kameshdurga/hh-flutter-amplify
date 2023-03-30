@@ -35,9 +35,12 @@ class OrderItem extends Model {
   final String? _Status;
   final TemporalTimestamp? _UpdatedTime;
   final TemporalTimestamp? _CreatedAt;
-  final String? _usersID;
+  final String? _DonorUserID;
   final TemporalTimestamp? _statusTime;
   final String? _ShardID;
+  final String? _RestaurantsID;
+  final String? _zipcode;
+  final String? _imageKey;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -86,9 +89,9 @@ class OrderItem extends Model {
     return _CreatedAt;
   }
   
-  String get usersID {
+  String get DonorUserID {
     try {
-      return _usersID!;
+      return _DonorUserID!;
     } catch(e) {
       throw new AmplifyCodeGenModelException(
           AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -107,6 +110,36 @@ class OrderItem extends Model {
     return _ShardID;
   }
   
+  String get RestaurantsID {
+    try {
+      return _RestaurantsID!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
+  String get zipcode {
+    try {
+      return _zipcode!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
+  String? get imageKey {
+    return _imageKey;
+  }
+  
   TemporalDateTime? get createdAt {
     return _createdAt;
   }
@@ -115,9 +148,9 @@ class OrderItem extends Model {
     return _updatedAt;
   }
   
-  const OrderItem._internal({required this.id, required LineItemId, ShopId, ItemSKU, RecipientID, Status, UpdatedTime, CreatedAt, required usersID, statusTime, ShardID, createdAt, updatedAt}): _LineItemId = LineItemId, _ShopId = ShopId, _ItemSKU = ItemSKU, _RecipientID = RecipientID, _Status = Status, _UpdatedTime = UpdatedTime, _CreatedAt = CreatedAt, _usersID = usersID, _statusTime = statusTime, _ShardID = ShardID, _createdAt = createdAt, _updatedAt = updatedAt;
+  const OrderItem._internal({required this.id, required LineItemId, ShopId, ItemSKU, RecipientID, Status, UpdatedTime, CreatedAt, required DonorUserID, statusTime, ShardID, required RestaurantsID, required zipcode, imageKey, createdAt, updatedAt}): _LineItemId = LineItemId, _ShopId = ShopId, _ItemSKU = ItemSKU, _RecipientID = RecipientID, _Status = Status, _UpdatedTime = UpdatedTime, _CreatedAt = CreatedAt, _DonorUserID = DonorUserID, _statusTime = statusTime, _ShardID = ShardID, _RestaurantsID = RestaurantsID, _zipcode = zipcode, _imageKey = imageKey, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory OrderItem({String? id, required String LineItemId, String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, required String usersID, TemporalTimestamp? statusTime, String? ShardID}) {
+  factory OrderItem({String? id, required String LineItemId, String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, required String DonorUserID, TemporalTimestamp? statusTime, String? ShardID, required String RestaurantsID, required String zipcode, String? imageKey}) {
     return OrderItem._internal(
       id: id == null ? UUID.getUUID() : id,
       LineItemId: LineItemId,
@@ -127,9 +160,12 @@ class OrderItem extends Model {
       Status: Status,
       UpdatedTime: UpdatedTime,
       CreatedAt: CreatedAt,
-      usersID: usersID,
+      DonorUserID: DonorUserID,
       statusTime: statusTime,
-      ShardID: ShardID);
+      ShardID: ShardID,
+      RestaurantsID: RestaurantsID,
+      zipcode: zipcode,
+      imageKey: imageKey);
   }
   
   bool equals(Object other) {
@@ -148,9 +184,12 @@ class OrderItem extends Model {
       _Status == other._Status &&
       _UpdatedTime == other._UpdatedTime &&
       _CreatedAt == other._CreatedAt &&
-      _usersID == other._usersID &&
+      _DonorUserID == other._DonorUserID &&
       _statusTime == other._statusTime &&
-      _ShardID == other._ShardID;
+      _ShardID == other._ShardID &&
+      _RestaurantsID == other._RestaurantsID &&
+      _zipcode == other._zipcode &&
+      _imageKey == other._imageKey;
   }
   
   @override
@@ -169,9 +208,12 @@ class OrderItem extends Model {
     buffer.write("Status=" + "$_Status" + ", ");
     buffer.write("UpdatedTime=" + (_UpdatedTime != null ? _UpdatedTime!.toString() : "null") + ", ");
     buffer.write("CreatedAt=" + (_CreatedAt != null ? _CreatedAt!.toString() : "null") + ", ");
-    buffer.write("usersID=" + "$_usersID" + ", ");
+    buffer.write("DonorUserID=" + "$_DonorUserID" + ", ");
     buffer.write("statusTime=" + (_statusTime != null ? _statusTime!.toString() : "null") + ", ");
     buffer.write("ShardID=" + "$_ShardID" + ", ");
+    buffer.write("RestaurantsID=" + "$_RestaurantsID" + ", ");
+    buffer.write("zipcode=" + "$_zipcode" + ", ");
+    buffer.write("imageKey=" + "$_imageKey" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -179,7 +221,7 @@ class OrderItem extends Model {
     return buffer.toString();
   }
   
-  OrderItem copyWith({String? id, String? LineItemId, String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, String? usersID, TemporalTimestamp? statusTime, String? ShardID}) {
+  OrderItem copyWith({String? id, String? LineItemId, String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, String? DonorUserID, TemporalTimestamp? statusTime, String? ShardID, String? RestaurantsID, String? zipcode, String? imageKey}) {
     return OrderItem._internal(
       id: id ?? this.id,
       LineItemId: LineItemId ?? this.LineItemId,
@@ -189,9 +231,12 @@ class OrderItem extends Model {
       Status: Status ?? this.Status,
       UpdatedTime: UpdatedTime ?? this.UpdatedTime,
       CreatedAt: CreatedAt ?? this.CreatedAt,
-      usersID: usersID ?? this.usersID,
+      DonorUserID: DonorUserID ?? this.DonorUserID,
       statusTime: statusTime ?? this.statusTime,
-      ShardID: ShardID ?? this.ShardID);
+      ShardID: ShardID ?? this.ShardID,
+      RestaurantsID: RestaurantsID ?? this.RestaurantsID,
+      zipcode: zipcode ?? this.zipcode,
+      imageKey: imageKey ?? this.imageKey);
   }
   
   OrderItem.fromJson(Map<String, dynamic> json)  
@@ -203,14 +248,21 @@ class OrderItem extends Model {
       _Status = json['Status'],
       _UpdatedTime = json['UpdatedTime'] != null ? TemporalTimestamp.fromSeconds(json['UpdatedTime']) : null,
       _CreatedAt = json['CreatedAt'] != null ? TemporalTimestamp.fromSeconds(json['CreatedAt']) : null,
-      _usersID = json['usersID'],
+      _DonorUserID = json['DonorUserID'],
       _statusTime = json['statusTime'] != null ? TemporalTimestamp.fromSeconds(json['statusTime']) : null,
       _ShardID = json['ShardID'],
+      _RestaurantsID = json['RestaurantsID'],
+      _zipcode = json['zipcode'],
+      _imageKey = json['imageKey'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'LineItemId': _LineItemId, 'ShopId': _ShopId, 'ItemSKU': _ItemSKU, 'RecipientID': _RecipientID, 'Status': _Status, 'UpdatedTime': _UpdatedTime?.toSeconds(), 'CreatedAt': _CreatedAt?.toSeconds(), 'usersID': _usersID, 'statusTime': _statusTime?.toSeconds(), 'ShardID': _ShardID, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'LineItemId': _LineItemId, 'ShopId': _ShopId, 'ItemSKU': _ItemSKU, 'RecipientID': _RecipientID, 'Status': _Status, 'UpdatedTime': _UpdatedTime?.toSeconds(), 'CreatedAt': _CreatedAt?.toSeconds(), 'DonorUserID': _DonorUserID, 'statusTime': _statusTime?.toSeconds(), 'ShardID': _ShardID, 'RestaurantsID': _RestaurantsID, 'zipcode': _zipcode, 'imageKey': _imageKey, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+  };
+  
+  Map<String, Object?> toMap() => {
+    'id': id, 'LineItemId': _LineItemId, 'ShopId': _ShopId, 'ItemSKU': _ItemSKU, 'RecipientID': _RecipientID, 'Status': _Status, 'UpdatedTime': _UpdatedTime, 'CreatedAt': _CreatedAt, 'DonorUserID': _DonorUserID, 'statusTime': _statusTime, 'ShardID': _ShardID, 'RestaurantsID': _RestaurantsID, 'zipcode': _zipcode, 'imageKey': _imageKey, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
   static final QueryField ID = QueryField(fieldName: "id");
@@ -221,9 +273,12 @@ class OrderItem extends Model {
   static final QueryField STATUS = QueryField(fieldName: "Status");
   static final QueryField UPDATEDTIME = QueryField(fieldName: "UpdatedTime");
   static final QueryField CREATEDAT = QueryField(fieldName: "CreatedAt");
-  static final QueryField USERSID = QueryField(fieldName: "usersID");
+  static final QueryField DONORUSERID = QueryField(fieldName: "DonorUserID");
   static final QueryField STATUSTIME = QueryField(fieldName: "statusTime");
   static final QueryField SHARDID = QueryField(fieldName: "ShardID");
+  static final QueryField RESTAURANTSID = QueryField(fieldName: "RestaurantsID");
+  static final QueryField ZIPCODE = QueryField(fieldName: "zipcode");
+  static final QueryField IMAGEKEY = QueryField(fieldName: "imageKey");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "OrderItem";
     modelSchemaDefinition.pluralName = "OrderItems";
@@ -237,6 +292,13 @@ class OrderItem extends Model {
           ModelOperation.DELETE,
           ModelOperation.READ
         ])
+    ];
+    
+    modelSchemaDefinition.indexes = [
+      ModelIndex(fields: const ["id", "LineItemId"], name: null),
+      ModelIndex(fields: const ["Status"], name: "Status-index"),
+      ModelIndex(fields: const ["DonorUserID"], name: "byDonorUser"),
+      ModelIndex(fields: const ["RestaurantsID"], name: "byRestaurant")
     ];
     
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
@@ -284,7 +346,7 @@ class OrderItem extends Model {
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: OrderItem.USERSID,
+      key: OrderItem.DONORUSERID,
       isRequired: true,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
@@ -297,6 +359,24 @@ class OrderItem extends Model {
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: OrderItem.SHARDID,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: OrderItem.RESTAURANTSID,
+      isRequired: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: OrderItem.ZIPCODE,
+      isRequired: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: OrderItem.IMAGEKEY,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
@@ -323,5 +403,10 @@ class _OrderItemModelType extends ModelType<OrderItem> {
   @override
   OrderItem fromJson(Map<String, dynamic> jsonData) {
     return OrderItem.fromJson(jsonData);
+  }
+  
+  @override
+  String modelName() {
+    return 'OrderItem';
   }
 }

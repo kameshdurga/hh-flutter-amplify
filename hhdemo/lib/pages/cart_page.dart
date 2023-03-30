@@ -18,7 +18,7 @@ class MyCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cart"),
+        title: const Text("Cart"),
         leading: ElevatedButton(
           onPressed: () {
             Navigator.pop(context);
@@ -85,8 +85,12 @@ class _CartTotal extends StatelessWidget {
         Theme.of(context).textTheme.displayLarge!.copyWith(fontSize: 48);
 
     var cart = context.watch<Cart>();
+    print("total is ");
+    print(cart.products.length);
 
     var total = cart.total.toString();
+
+    print("total is after " + total);
 
     var _paymentItems = [
       PaymentItem(

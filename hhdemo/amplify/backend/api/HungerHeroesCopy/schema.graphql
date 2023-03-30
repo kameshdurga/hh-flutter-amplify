@@ -21,10 +21,28 @@ type Users @model @auth(rules: [{allow: public}]) {
   id: ID!
   Email: AWSEmail
   UserStatus: String @index(name: "UserStatus-index")
-  Phone: AWSPhone
+  Phone: AWSPhone @index(name: "byPhone")
   NotificationStatus: String
+  zipcode: String! @index(name: "ZipCodeIndex", sortKeyFields: [ "timestamp"])
+  timestamp: AWSDateTime
 }
 
+
+type RestaurantUser @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Email: AWSEmail  @index(name: "byEmail")
+  UserStatus: String
+  Phone: AWSPhone
+  RestaurantsID: ID @index(name: "byRestaurant")
+}
+
+type DonorUser @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Email: AWSEmail  @index(name: "byEmail")
+  UserStatus: String
+  Phone: AWSPhone
+  RestaurantsID: ID @index(name: "byRestaurant")
+}
 
 
  type OrderItem @model @auth(rules: [{allow: public}]) {
@@ -37,7 +55,10 @@ type Users @model @auth(rules: [{allow: public}]) {
   Status: String @index(name: "Status-index")
   UpdatedTime: AWSTimestamp
   CreatedAt: AWSTimestamp
-  usersID: ID! @index(name: "byUsers")
+  DonorUserID: ID! @index(name: "byDonorUser")
   statusTime: AWSTimestamp
   ShardID: String
+  RestaurantsID: ID! @index(name: "byRestaurant")
+  zipcode: String!
+  imageKey: String
   }

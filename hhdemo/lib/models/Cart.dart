@@ -9,11 +9,16 @@ class Cart with ChangeNotifier {
 
   String restaurant = "";
 
+  String zipCode = "";
+
   HashMap<String, int> hashMap = HashMap<String, int>();
 
   String userEmail = "";
 
   double get total {
+    print("product is ");
+    print(products.length);
+    if (products.isEmpty) return 0.0;
     return products.fold(0.0, (double currentTotal, Menu nextProduct) {
       return currentTotal +
           (double.parse(nextProduct.price) *
@@ -23,6 +28,10 @@ class Cart with ChangeNotifier {
 
   void setRestaurant(String shop) {
     restaurant = shop;
+  }
+
+  void setZipCode(String zip) {
+    zipCode = zip;
   }
 
   void setUserEmail(String email) {
@@ -41,6 +50,8 @@ class Cart with ChangeNotifier {
     } else {
       products.add(product);
       print('going to else logic value before update: ');
+
+      print(products.length.toString());
 
       hashMap.putIfAbsent(product.item, () => 1);
       print('getting value from product: ' + hashMap[product.item].toString());
@@ -61,8 +72,16 @@ class Cart with ChangeNotifier {
     if (hashMap[product.item] == 1) {
       hashMap.remove(product.item);
       products.remove(product);
-    } else
+    } else {
       hashMap.update(product.item, (value) => value - 1);
+    }
+    notifyListeners();
+  }
+
+  void removeAll() {
+    hashMap.clear();
+    products.clear();
+    print("products length issss " + products.length.toString());
     notifyListeners();
   }
 }
