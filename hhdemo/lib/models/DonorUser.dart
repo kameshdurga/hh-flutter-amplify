@@ -38,9 +38,14 @@ class DonorUser extends Model {
   @override
   getInstanceType() => classType;
   
+  @Deprecated('[getId] is being deprecated in favor of custom primary key feature. Use getter [modelIdentifier] to get model identifier.')
   @override
-  String getId() {
-    return id;
+  String getId() => id;
+  
+  DonorUserModelIdentifier get modelIdentifier {
+      return DonorUserModelIdentifier(
+        id: id
+      );
   }
   
   String? get Email {
@@ -113,9 +118,9 @@ class DonorUser extends Model {
     return buffer.toString();
   }
   
-  DonorUser copyWith({String? id, String? Email, String? UserStatus, String? Phone, String? RestaurantsID}) {
+  DonorUser copyWith({String? Email, String? UserStatus, String? Phone, String? RestaurantsID}) {
     return DonorUser._internal(
-      id: id ?? this.id,
+      id: id,
       Email: Email ?? this.Email,
       UserStatus: UserStatus ?? this.UserStatus,
       Phone: Phone ?? this.Phone,
@@ -139,6 +144,7 @@ class DonorUser extends Model {
     'id': id, 'Email': _Email, 'UserStatus': _UserStatus, 'Phone': _Phone, 'RestaurantsID': _RestaurantsID, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
+  static final QueryModelIdentifier<DonorUserModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<DonorUserModelIdentifier>();
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField EMAIL = QueryField(fieldName: "Email");
   static final QueryField USERSTATUS = QueryField(fieldName: "UserStatus");
@@ -218,4 +224,48 @@ class _DonorUserModelType extends ModelType<DonorUser> {
   String modelName() {
     return 'DonorUser';
   }
+}
+
+/**
+ * This is an auto generated class representing the model identifier
+ * of [DonorUser] in your schema.
+ */
+@immutable
+class DonorUserModelIdentifier implements ModelIdentifier<DonorUser> {
+  final String id;
+
+  /** Create an instance of DonorUserModelIdentifier using [id] the primary key. */
+  const DonorUserModelIdentifier({
+    required this.id});
+  
+  @override
+  Map<String, dynamic> serializeAsMap() => (<String, dynamic>{
+    'id': id
+  });
+  
+  @override
+  List<Map<String, dynamic>> serializeAsList() => serializeAsMap()
+    .entries
+    .map((entry) => (<String, dynamic>{ entry.key: entry.value }))
+    .toList();
+  
+  @override
+  String serializeAsString() => serializeAsMap().values.join('#');
+  
+  @override
+  String toString() => 'DonorUserModelIdentifier(id: $id)';
+  
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    
+    return other is DonorUserModelIdentifier &&
+      id == other.id;
+  }
+  
+  @override
+  int get hashCode =>
+    id.hashCode;
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "HungerHeroesCopy",
+    "apiName": "hungerheroes",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",

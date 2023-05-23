@@ -47,9 +47,24 @@ class OrderItem extends Model {
   @override
   getInstanceType() => classType;
   
+  @Deprecated('[getId] is being deprecated in favor of custom primary key feature. Use getter [modelIdentifier] to get model identifier.')
   @override
-  String getId() {
-    return id;
+  String getId() => id;
+  
+  OrderItemModelIdentifier get modelIdentifier {
+    try {
+      return OrderItemModelIdentifier(
+        id: id,
+        LineItemId: _LineItemId!
+      );
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   String get LineItemId {
@@ -221,10 +236,10 @@ class OrderItem extends Model {
     return buffer.toString();
   }
   
-  OrderItem copyWith({String? id, String? LineItemId, String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, String? DonorUserID, TemporalTimestamp? statusTime, String? ShardID, String? RestaurantsID, String? zipcode, String? imageKey}) {
+  OrderItem copyWith({String? ShopId, String? ItemSKU, String? RecipientID, String? Status, TemporalTimestamp? UpdatedTime, TemporalTimestamp? CreatedAt, String? DonorUserID, TemporalTimestamp? statusTime, String? ShardID, String? RestaurantsID, String? zipcode, String? imageKey}) {
     return OrderItem._internal(
-      id: id ?? this.id,
-      LineItemId: LineItemId ?? this.LineItemId,
+      id: id,
+      LineItemId: LineItemId,
       ShopId: ShopId ?? this.ShopId,
       ItemSKU: ItemSKU ?? this.ItemSKU,
       RecipientID: RecipientID ?? this.RecipientID,
@@ -265,6 +280,7 @@ class OrderItem extends Model {
     'id': id, 'LineItemId': _LineItemId, 'ShopId': _ShopId, 'ItemSKU': _ItemSKU, 'RecipientID': _RecipientID, 'Status': _Status, 'UpdatedTime': _UpdatedTime, 'CreatedAt': _CreatedAt, 'DonorUserID': _DonorUserID, 'statusTime': _statusTime, 'ShardID': _ShardID, 'RestaurantsID': _RestaurantsID, 'zipcode': _zipcode, 'imageKey': _imageKey, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
+  static final QueryModelIdentifier<OrderItemModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<OrderItemModelIdentifier>();
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField LINEITEMID = QueryField(fieldName: "LineItemId");
   static final QueryField SHOPID = QueryField(fieldName: "ShopId");
@@ -409,4 +425,56 @@ class _OrderItemModelType extends ModelType<OrderItem> {
   String modelName() {
     return 'OrderItem';
   }
+}
+
+/**
+ * This is an auto generated class representing the model identifier
+ * of [OrderItem] in your schema.
+ */
+@immutable
+class OrderItemModelIdentifier implements ModelIdentifier<OrderItem> {
+  final String id;
+  final String LineItemId;
+
+  /**
+   * Create an instance of OrderItemModelIdentifier using [id] the primary key.
+   * And [LineItemId] the sort key.
+   */
+  const OrderItemModelIdentifier({
+    required this.id,
+    required this.LineItemId});
+  
+  @override
+  Map<String, dynamic> serializeAsMap() => (<String, dynamic>{
+    'id': id,
+    'LineItemId': LineItemId
+  });
+  
+  @override
+  List<Map<String, dynamic>> serializeAsList() => serializeAsMap()
+    .entries
+    .map((entry) => (<String, dynamic>{ entry.key: entry.value }))
+    .toList();
+  
+  @override
+  String serializeAsString() => serializeAsMap().values.join('#');
+  
+  @override
+  String toString() => 'OrderItemModelIdentifier(id: $id, LineItemId: $LineItemId)';
+  
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    
+    return other is OrderItemModelIdentifier &&
+      id == other.id &&
+      LineItemId == other.LineItemId;
+  }
+  
+  @override
+  int get hashCode =>
+    id.hashCode ^
+    LineItemId.hashCode;
 }

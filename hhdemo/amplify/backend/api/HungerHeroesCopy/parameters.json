@@ -1,6 +1,0 @@
-{
-  "AppSyncApiName": "HungerHeroesCopy",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2022-10-21T02:46:17.632Z"
-}

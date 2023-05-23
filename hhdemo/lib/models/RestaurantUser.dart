@@ -38,9 +38,14 @@ class RestaurantUser extends Model {
   @override
   getInstanceType() => classType;
   
+  @Deprecated('[getId] is being deprecated in favor of custom primary key feature. Use getter [modelIdentifier] to get model identifier.')
   @override
-  String getId() {
-    return id;
+  String getId() => id;
+  
+  RestaurantUserModelIdentifier get modelIdentifier {
+      return RestaurantUserModelIdentifier(
+        id: id
+      );
   }
   
   String? get Email {
@@ -113,9 +118,9 @@ class RestaurantUser extends Model {
     return buffer.toString();
   }
   
-  RestaurantUser copyWith({String? id, String? Email, String? UserStatus, String? Phone, String? RestaurantsID}) {
+  RestaurantUser copyWith({String? Email, String? UserStatus, String? Phone, String? RestaurantsID}) {
     return RestaurantUser._internal(
-      id: id ?? this.id,
+      id: id,
       Email: Email ?? this.Email,
       UserStatus: UserStatus ?? this.UserStatus,
       Phone: Phone ?? this.Phone,
@@ -139,6 +144,7 @@ class RestaurantUser extends Model {
     'id': id, 'Email': _Email, 'UserStatus': _UserStatus, 'Phone': _Phone, 'RestaurantsID': _RestaurantsID, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
+  static final QueryModelIdentifier<RestaurantUserModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<RestaurantUserModelIdentifier>();
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField EMAIL = QueryField(fieldName: "Email");
   static final QueryField USERSTATUS = QueryField(fieldName: "UserStatus");
@@ -218,4 +224,48 @@ class _RestaurantUserModelType extends ModelType<RestaurantUser> {
   String modelName() {
     return 'RestaurantUser';
   }
+}
+
+/**
+ * This is an auto generated class representing the model identifier
+ * of [RestaurantUser] in your schema.
+ */
+@immutable
+class RestaurantUserModelIdentifier implements ModelIdentifier<RestaurantUser> {
+  final String id;
+
+  /** Create an instance of RestaurantUserModelIdentifier using [id] the primary key. */
+  const RestaurantUserModelIdentifier({
+    required this.id});
+  
+  @override
+  Map<String, dynamic> serializeAsMap() => (<String, dynamic>{
+    'id': id
+  });
+  
+  @override
+  List<Map<String, dynamic>> serializeAsList() => serializeAsMap()
+    .entries
+    .map((entry) => (<String, dynamic>{ entry.key: entry.value }))
+    .toList();
+  
+  @override
+  String serializeAsString() => serializeAsMap().values.join('#');
+  
+  @override
+  String toString() => 'RestaurantUserModelIdentifier(id: $id)';
+  
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    
+    return other is RestaurantUserModelIdentifier &&
+      id == other.id;
+  }
+  
+  @override
+  int get hashCode =>
+    id.hashCode;
 }

@@ -9,7 +9,7 @@ type Restaurants @model @auth(rules: [{allow: public}]) {
   Contact1: String
   Contact2: String
   Phone1: AWSPhone
-  Phone2: AWSPhone
+  Phone2: String
   Email: AWSEmail
   RestaurantID: ID
   Web: String

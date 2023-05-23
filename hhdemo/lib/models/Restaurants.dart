@@ -49,9 +49,14 @@ class Restaurants extends Model {
   @override
   getInstanceType() => classType;
   
+  @Deprecated('[getId] is being deprecated in favor of custom primary key feature. Use getter [modelIdentifier] to get model identifier.')
   @override
-  String getId() {
-    return id;
+  String getId() => id;
+  
+  RestaurantsModelIdentifier get modelIdentifier {
+      return RestaurantsModelIdentifier(
+        id: id
+      );
   }
   
   String? get Name {
@@ -201,9 +206,9 @@ class Restaurants extends Model {
     return buffer.toString();
   }
   
-  Restaurants copyWith({String? id, String? Name, String? Address, String? Address2, String? City, String? State, int? Zipcode, String? Contact1, String? Contact2, String? Phone1, String? Phone2, String? Email, String? RestaurantID, String? Web, String? Menu, String? imagekey}) {
+  Restaurants copyWith({String? Name, String? Address, String? Address2, String? City, String? State, int? Zipcode, String? Contact1, String? Contact2, String? Phone1, String? Phone2, String? Email, String? RestaurantID, String? Web, String? Menu, String? imagekey}) {
     return Restaurants._internal(
-      id: id ?? this.id,
+      id: id,
       Name: Name ?? this.Name,
       Address: Address ?? this.Address,
       Address2: Address2 ?? this.Address2,
@@ -249,6 +254,7 @@ class Restaurants extends Model {
     'id': id, 'Name': _Name, 'Address': _Address, 'Address2': _Address2, 'City': _City, 'State': _State, 'Zipcode': _Zipcode, 'Contact1': _Contact1, 'Contact2': _Contact2, 'Phone1': _Phone1, 'Phone2': _Phone2, 'Email': _Email, 'RestaurantID': _RestaurantID, 'Web': _Web, 'Menu': _Menu, 'imagekey': _imagekey, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
+  static final QueryModelIdentifier<RestaurantsModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<RestaurantsModelIdentifier>();
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField NAME = QueryField(fieldName: "Name");
   static final QueryField ADDRESS = QueryField(fieldName: "Address");
@@ -400,4 +406,48 @@ class _RestaurantsModelType extends ModelType<Restaurants> {
   String modelName() {
     return 'Restaurants';
   }
+}
+
+/**
+ * This is an auto generated class representing the model identifier
+ * of [Restaurants] in your schema.
+ */
+@immutable
+class RestaurantsModelIdentifier implements ModelIdentifier<Restaurants> {
+  final String id;
+
+  /** Create an instance of RestaurantsModelIdentifier using [id] the primary key. */
+  const RestaurantsModelIdentifier({
+    required this.id});
+  
+  @override
+  Map<String, dynamic> serializeAsMap() => (<String, dynamic>{
+    'id': id
+  });
+  
+  @override
+  List<Map<String, dynamic>> serializeAsList() => serializeAsMap()
+    .entries
+    .map((entry) => (<String, dynamic>{ entry.key: entry.value }))
+    .toList();
+  
+  @override
+  String serializeAsString() => serializeAsMap().values.join('#');
+  
+  @override
+  String toString() => 'RestaurantsModelIdentifier(id: $id)';
+  
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    
+    return other is RestaurantsModelIdentifier &&
+      id == other.id;
+  }
+  
+  @override
+  int get hashCode =>
+    id.hashCode;
 }

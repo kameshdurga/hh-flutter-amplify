@@ -1,13 +1,13 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "HungerHeroesCopy": {
+    "hungerheroes": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string",
       "GraphQLAPIKeyOutput": "string"
     }
   },
   "auth": {
-    "HungerHeroesCopy": {
+    "HungerHeroes": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -15,13 +15,10 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
-    },
-    "userPoolGroups": {
-      "testpoolGroupRole": "string"
     }
   },
   "storage": {
-    "s31b1d5ab3": {
+    "s3e8ed00df": {
       "BucketName": "string",
       "Region": "string"
     }

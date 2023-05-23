@@ -23,7 +23,7 @@ PODS:
     - AWSPluginsCore (= 1.28.3)
   - AppSyncRealTimeClient (2.1.1):
     - Starscream (~> 4.0.4)
-  - AWSCore (2.28.6)
+  - AWSCore (2.28.5)
   - AWSPluginsCore (1.28.3):
     - Amplify (= 1.28.3)
     - AWSCore (~> 2.28.0)
@@ -118,7 +118,7 @@ SPEC CHECKSUMS:
   amplify_secure_storage: 501cbdac671a050090d48dfcc002d5637d3f4a55
   AmplifyPlugins: 98bcd23f2c13179f75c733b887e80dd06243be5e
   AppSyncRealTimeClient: 937360221f2b664c4c33ae142a60643e64f480cd
-  AWSCore: d1194a634f406c1f93d8b6d78bf7ddbda3b5f663
+  AWSCore: 4bad3f0eb17393b4926a9491e32b835991c56382
   AWSPluginsCore: 93f813579479fa4c5bfff58817df89e0e10f9f3b
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
@@ -134,6 +134,6 @@ SPEC CHECKSUMS:
   StripeUICore: 6a5bbea0164d63bd91000f001903e7901859e1a4
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
-PODFILE CHECKSUM: 0c43f760e0901e89a19af6b86ddf48bae2c64a5b
+PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 
 COCOAPODS: 1.11.2

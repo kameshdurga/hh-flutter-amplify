@@ -43,14 +43,14 @@ class _HomePageState extends State<HomePage> {
     try {
       final restaurants = await _apiService.getRestaurants();
 
-      _apiService
-          .getRestaurantById("0316cc82-3d2a-4e1a-9d8c-ec9f0eaf7c21")
-          .then(
-        (value) {
-          print("get restaurant by id is");
-          print(value!.Name);
-        },
-      );
+      // _apiService
+      //     .getRestaurantById("0316cc82-3d2a-4e1a-9d8c-ec9f0eaf7c21")
+      //     .then(
+      //   (value) {
+      //     print("get restaurant by id is");
+      //     print(value!.Name);
+      //   },
+      // );
 
       setState(() {
         _restaurants =

@@ -1,26 +1,22 @@
 {
-  "dev": {
+  "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-hungerheroescopy-dev-115856-authRole",
-      "UnauthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-dev-115856-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::754404958569:role/amplify-hungerheroescopy-dev-115856-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-hungerheroescopy-dev-115856-deployment",
-      "UnauthRoleName": "amplify-hungerheroescopy-dev-115856-unauthRole",
-      "StackName": "amplify-hungerheroescopy-dev-115856",
-      "StackId": "arn:aws:cloudformation:us-east-2:754404958569:stack/amplify-hungerheroescopy-dev-115856/9d9a1010-9690-11ed-b2ee-02ed45a39e88",
-      "AmplifyAppId": "d15c56y49hlsbn"
+      "AuthRoleName": "amplify-hungerheroes-staging-222502-authRole",
+      "UnauthRoleArn": "arn:aws:iam::813141791576:role/amplify-hungerheroes-staging-222502-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::813141791576:role/amplify-hungerheroes-staging-222502-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-hungerheroes-staging-222502-deployment",
+      "UnauthRoleName": "amplify-hungerheroes-staging-222502-unauthRole",
+      "StackName": "amplify-hungerheroes-staging-222502",
+      "StackId": "arn:aws:cloudformation:us-east-1:813141791576:stack/amplify-hungerheroes-staging-222502/57f7bc80-eeb8-11ed-b00b-128ba12d69d7",
+      "AmplifyAppId": "d2unfpr5ump9aa"
     },
     "categories": {
       "auth": {
-        "HungerHeroesCopy": {},
-        "userPoolGroups": {}
-      },
-      "api": {
-        "HungerHeroesCopy": {}
+        "HungerHeroes": {}
       },
       "storage": {
-        "s31b1d5ab3": {}
+        "s3e8ed00df": {}
       }
     }
   }

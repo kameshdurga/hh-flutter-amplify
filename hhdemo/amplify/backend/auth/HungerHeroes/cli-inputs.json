@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "hungerheroescopya2c0386a_identitypool_a2c0386a",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "hunger62558d48",
-    "userPoolName": "HungerHeroesCopy",
+    "identityPoolName": "testAuthIdentityPool",
+    "allowUnauthenticatedIdentities": true,
+    "resourceNameTruncated": "hunger50ad6f6e",
+    "userPoolName": "HungerHeroes",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -14,21 +14,26 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code",
-    "emailVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Verification code: {####}",
+    "emailVerificationMessage": "Verification code: {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
-    "passwordPolicyCharacters": [],
+    "passwordPolicyCharacters": [
+      "Requires Lowercase",
+      "Requires Numbers",
+      "Requires Symbols",
+      "Requires Uppercase"
+    ],
     "requiredAttributes": [],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": "700",
+    "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "Hunger62558d48_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "Hunger50ad6f6e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "62558d48",
-    "resourceName": "HungerHeroesCopy",
+    "sharedId": "50ad6f6e",
+    "resourceName": "HungerHeroes",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
     "usernameAttributes": [
@@ -38,6 +43,8 @@
     "userPoolGroups": false,
     "userPoolGroupList": [],
     "adminQueries": false,
+    "thirdPartyAuth": false,
+    "authProviders": [],
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
     "authRoleArn": {
@@ -53,14 +60,6 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": [],
-    "hostedUI": false,
-    "triggers": {},
-    "authProviders": [],
-    "parentStack": {
-      "Ref": "AWS::StackId"
-    },
-    "permissions": [],
-    "thirdPartyAuth": false
+    "dependsOn": []
   }
-} 
+}

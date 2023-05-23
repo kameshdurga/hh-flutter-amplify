@@ -40,9 +40,14 @@ class Users extends Model {
   @override
   getInstanceType() => classType;
   
+  @Deprecated('[getId] is being deprecated in favor of custom primary key feature. Use getter [modelIdentifier] to get model identifier.')
   @override
-  String getId() {
-    return id;
+  String getId() => id;
+  
+  UsersModelIdentifier get modelIdentifier {
+      return UsersModelIdentifier(
+        id: id
+      );
   }
   
   String? get Email {
@@ -138,9 +143,9 @@ class Users extends Model {
     return buffer.toString();
   }
   
-  Users copyWith({String? id, String? Email, String? UserStatus, String? Phone, String? NotificationStatus, String? zipcode, TemporalDateTime? timestamp}) {
+  Users copyWith({String? Email, String? UserStatus, String? Phone, String? NotificationStatus, String? zipcode, TemporalDateTime? timestamp}) {
     return Users._internal(
-      id: id ?? this.id,
+      id: id,
       Email: Email ?? this.Email,
       UserStatus: UserStatus ?? this.UserStatus,
       Phone: Phone ?? this.Phone,
@@ -168,6 +173,7 @@ class Users extends Model {
     'id': id, 'Email': _Email, 'UserStatus': _UserStatus, 'Phone': _Phone, 'NotificationStatus': _NotificationStatus, 'zipcode': _zipcode, 'timestamp': _timestamp, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
+  static final QueryModelIdentifier<UsersModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<UsersModelIdentifier>();
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField EMAIL = QueryField(fieldName: "Email");
   static final QueryField USERSTATUS = QueryField(fieldName: "UserStatus");
@@ -262,4 +268,48 @@ class _UsersModelType extends ModelType<Users> {
   String modelName() {
     return 'Users';
   }
+}
+
+/**
+ * This is an auto generated class representing the model identifier
+ * of [Users] in your schema.
+ */
+@immutable
+class UsersModelIdentifier implements ModelIdentifier<Users> {
+  final String id;
+
+  /** Create an instance of UsersModelIdentifier using [id] the primary key. */
+  const UsersModelIdentifier({
+    required this.id});
+  
+  @override
+  Map<String, dynamic> serializeAsMap() => (<String, dynamic>{
+    'id': id
+  });
+  
+  @override
+  List<Map<String, dynamic>> serializeAsList() => serializeAsMap()
+    .entries
+    .map((entry) => (<String, dynamic>{ entry.key: entry.value }))
+    .toList();
+  
+  @override
+  String serializeAsString() => serializeAsMap().values.join('#');
+  
+  @override
+  String toString() => 'UsersModelIdentifier(id: $id)';
+  
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    
+    return other is UsersModelIdentifier &&
+      id == other.id;
+  }
+  
+  @override
+  int get hashCode =>
+    id.hashCode;
 }
